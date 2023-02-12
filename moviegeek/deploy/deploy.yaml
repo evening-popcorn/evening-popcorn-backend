@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviegeek-deployment
+  labels:
+    app: moviegeek
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moviegeek
+  template:
+    metadata:
+      labels:
+        app: moviegeek
+    spec:
+      containers:
+      - name: moviegeek
+        image: registry.digitalocean.com/evening-popcorn-registry/moviegeek:latest
+        ports:
+        - containerPort: 8080
