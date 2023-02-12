@@ -5,7 +5,7 @@ metadata:
   labels:
     app: moviegeek
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: moviegeek
@@ -15,7 +15,20 @@ spec:
         app: moviegeek
     spec:
       containers:
-      - name: moviegeek
-        image: registry.digitalocean.com/evening-popcorn-registry/moviegeek:latest
-        ports:
-        - containerPort: 8080
+        - image: registry.digitalocean.com/evening-popcorn-registry/moviegeek:latest
+          imagePullPolicy: Always
+          name: sample-container
+          ports:
+            - containerPort: 8080
+              name: fastapi
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /
+            initialDelaySeconds: 15
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /
+            initialDelaySeconds: 15
+            periodSeconds: 15
