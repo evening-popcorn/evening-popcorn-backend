@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "moviegeek"
+name = "backloger"
 version = "0.1.0"
 description = ""
 authors = ["bitizen248 <van4011@yandex.ru>"]
@@ -7,9 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi = "^0.91.0"
-uvicorn = "^0.20.0"
-tmdbv3api = "^1.7.7"
 
 
 [build-system]
