@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+  labels:
+    app: api-gateway
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - image: registry.digitalocean.com/evening-popcorn-registry/api-gateway:latest
+          imagePullPolicy: Always
+          name: api-gateway
+          ports:
+            - containerPort: 8080
+              name: fastapi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-service
+spec:
+  type: ClusterIP
+  selector:
+    app: api-gateway
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-gateway-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/issuer: letsencrypt-issuer-prod
+spec:
+  tls:
+    - hosts:
+        - eveningpopcorn.dev
+      secretName: api-gateway-tls
+  rules:
+  - host: "eveningpopcorn.dev"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/api"
+        backend:
+          service:
+            name: api-gateway-service
+            port:
+              number: 80
