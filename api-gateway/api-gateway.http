@@ -1,0 +1,14 @@
+POST http://localhost:8080/api/google-auth
+Content-Type: application/json
+
+{
+  "authCode":"4/0AWtgzh7pDfVO3P4Go2td_uh-MV5yJsJYmTEJR72-K-sMrpSq6tnffuFY8J63PAAlE3gpCg"
+}
+
+###
+POST http://localhost:8080/api/apple-auth
+Content-Type: application/json
+
+{
+  "authCode":"cebb4c5b7f45a4abd895eb9db98f947f6.0.rvqy.txjxhqaOsbhGHXMNkzScfg"
+}
