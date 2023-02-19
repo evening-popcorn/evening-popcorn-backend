@@ -1,0 +1,16 @@
+on: [push]
+
+jobs:
+  build:
+    name: Build moviegeek image
+    runs-on: self-hosted
+    env:
+      IMAGE_NAME: moviegeek
+      TAG: latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+            cd moviegeek
+            docker build -t $IMAGE_NAME:$TAG .
+            docker image tag $IMAGE_NAME:$TAG registry.digitalocean.com/${{ variables.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
+	        docker push registry.digitalocean.com/${{ variables.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
