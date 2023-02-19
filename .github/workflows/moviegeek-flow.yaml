@@ -2,6 +2,8 @@ on:
   push:
     paths:
       - moviegeek/**
+    branches:
+      - main
 jobs:
   build:
     name: Build moviegeek image
