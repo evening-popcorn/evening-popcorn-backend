@@ -8,7 +8,7 @@ packages = [{include = "api_gateway"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi = "^0.91.0"
+fastapi = "^0.92.0"
 uvicorn = "^0.20.0"
 
 

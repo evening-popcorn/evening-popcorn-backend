@@ -4,9 +4,9 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.get("/")
+@app.get("/api")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "This is new API"}
 
 
 if __name__ == "__main__":
