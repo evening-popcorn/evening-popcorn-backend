@@ -1,5 +1,7 @@
-on: [push]
-
+on:
+  push:
+    paths:
+      - moviegeek/**
 jobs:
   build:
     name: Build moviegeek image
