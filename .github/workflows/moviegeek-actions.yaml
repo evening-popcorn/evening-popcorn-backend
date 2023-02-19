@@ -9,6 +9,7 @@ jobs:
       TAG: latest
     steps:
       - uses: actions/checkout@v3
+      - name: Building image
         run: |
             cd moviegeek
             docker build -t $IMAGE_NAME:$TAG .
