@@ -27,6 +27,7 @@ kind: Service
 metadata:
   name: moviegeek-service
 spec:
+  type: ClusterIP
   selector:
     app: moviegeek
   ports:

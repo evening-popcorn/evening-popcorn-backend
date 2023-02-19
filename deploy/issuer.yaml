@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-issuer-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: bitizen@eveningpopcorn.dev
+    privateKeySecretRef:
+      name: letsencrypt-issuer-prod-private-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx

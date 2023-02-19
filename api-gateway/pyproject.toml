@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "api-gateway"
+version = "0.1.0"
+description = ""
+authors = ["bitizen248 <van4011@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "api_gateway"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
