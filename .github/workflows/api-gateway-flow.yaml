@@ -25,4 +25,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploy to K8s
-        run: kubectl apply -f deploy/manifest.yaml
+        run: kubectl apply -f api-gateway/deploy/manifest.yaml
