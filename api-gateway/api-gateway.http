@@ -10,5 +10,5 @@ POST http://localhost:8080/api/apple-auth
 Content-Type: application/json
 
 {
-  "authCode":"cebb4c5b7f45a4abd895eb9db98f947f6.0.rvqy.txjxhqaOsbhGHXMNkzScfg"
+  "authCode":"ce0310b9b340c4df287d9b73f069ff9d9.0.svqy.3eE-DMbFbYUCtCeEgsIM-A"
 }

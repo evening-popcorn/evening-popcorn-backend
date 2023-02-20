@@ -21,6 +21,10 @@ spec:
           ports:
             - containerPort: 8080
               name: fastapi
+      initContainers:
+        - name: postgres-migrations
+          image: registry.digitalocean.com/evening-popcorn-registry/api-gateway:latest
+          command: ["aerich", "upgrade"]
 ---
 apiVersion: v1
 kind: Service
