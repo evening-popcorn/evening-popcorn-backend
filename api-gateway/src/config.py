@@ -84,11 +84,21 @@ class AppleSighInConfig(ConfigModel):
 
 APPLE_SIGN_IN_CONFIG = AppleSighInConfig()
 
+
+class GoogleAuthConfig(ConfigModel):
+    client_id: str
+    client_secret: str
+    redirect_uri: str = "https://eveningpopcorn.dev/api/auth"
+
+
+GOOGLE_AUTH_CONFIG = GoogleAuthConfig()
+
 if __name__ == "__main__":
     configs = [
         PostgresConfig.get_fields_defaults(),
         MongoConfig.get_fields_defaults(),
-        AppleSighInConfig.get_fields_defaults()
+        AppleSighInConfig.get_fields_defaults(),
+        GoogleAuthConfig.get_fields_defaults(),
     ]
 
     if os.path.exists("../.env"):

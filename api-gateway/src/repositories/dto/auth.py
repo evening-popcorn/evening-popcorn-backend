@@ -16,6 +16,6 @@ class AuthTokenDto(BaseModel):
     def __init__(self, model: AuthTokens):
         super(AuthTokenDto, self).__init__(
             token=model.token,
-            renew_token=self.renew_token,
-            expiration=self.expiration
+            renew_token=model.renew_token,
+            expiration=model.expiration
         )

@@ -13,10 +13,9 @@ class Users(models.Model):
 
 class OAuthClient(models.Model):
     """
-    User's OAuth  athentications
+    User's OAuth  authentications
     """
     id = fields.UUIDField(pk=True)
     user = fields.ForeignKeyField("models.Users")
     service = fields.CharField(max_length=64)
-
-
+    client_id = fields.CharField(max_length=128)

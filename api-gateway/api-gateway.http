@@ -1,14 +1,16 @@
-POST http://localhost:8080/api/google-auth
+POST http://localhost:8080/api/v1/auth/social/login
 Content-Type: application/json
 
 {
-  "authCode":"4/0AWtgzh7pDfVO3P4Go2td_uh-MV5yJsJYmTEJR72-K-sMrpSq6tnffuFY8J63PAAlE3gpCg"
+  "oauth_type": "apple",
+  "auth_code": "cf856110600a249fd93c68387f52c0fc7.0.rvqy.rrlqe_RWNcKLbM2piW_GYA"
 }
 
 ###
-POST http://localhost:8080/api/apple-auth
+POST http://localhost:8080/api/v1/auth/social/login
 Content-Type: application/json
 
 {
-  "authCode":"ce0310b9b340c4df287d9b73f069ff9d9.0.svqy.3eE-DMbFbYUCtCeEgsIM-A"
+  "oauth_type": "google",
+  "auth_code": "4/0AWtgzh7ZplBsoeG-q3QWvY0cGH88sejYcMHzcBEOHLFrJURcKmNbWxiKs4vw5OH79OpVeg"
 }
