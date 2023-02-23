@@ -1,33 +1,13 @@
-POST http://localhost:8080/api/v1/auth/social/login
-Content-Type: application/json
-
-{
-  "oauth_type": "apple",
-  "auth_code": "cf856110600a249fd93c68387f52c0fc7.0.rvqy.rrlqe_RWNcKLbM2piW_GYA"
-}
-
-###
-POST http://localhost:8080/api/v1/auth/social/login
-Content-Type: application/json
-
-{
-  "oauth_type": "google",
-  "auth_code": "4/0AWtgzh7ZplBsoeG-q3QWvY0cGH88sejYcMHzcBEOHLFrJURcKmNbWxiKs4vw5OH79OpVeg"
-}
-###
 POST https://eveningpopcorn.dev/api/v1/auth/social/login
 Content-Type: application/json
 
 {
   "oauth_type": "apple",
-  "auth_code": "cf856110600a249fd93c68387f52c0fc7.0.rvqy.rrlqe_RWNcKLbM2piW_GYA"
+  "auth_code": "c47c896beeeac47d5a0a3ddd8b36973ad.0.svqy.brbhVawP8bj6P38QVQZLXA"
 }
 
 ###
-POST http://localhost:8080/api/v1/auth/social/login
+GET http://localhost:8080/api/v1/movie/161
 Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
 
-{
-  "oauth_type": "google",
-  "auth_code": "4/0AWtgzh7ZplBsoeG-q3QWvY0cGH88sejYcMHzcBEOHLFrJURcKmNbWxiKs4vw5OH79OpVeg"
-}
