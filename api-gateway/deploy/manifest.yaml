@@ -21,9 +21,6 @@ spec:
           ports:
             - containerPort: 8080
               name: fastapi
-          env:
-            - name: POSTGRES_CONFIG__SSL
-              value: True
           envFrom:
             - secretRef:
                 name: do-postgres-secrets

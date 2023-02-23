@@ -14,3 +14,20 @@ Content-Type: application/json
   "oauth_type": "google",
   "auth_code": "4/0AWtgzh7ZplBsoeG-q3QWvY0cGH88sejYcMHzcBEOHLFrJURcKmNbWxiKs4vw5OH79OpVeg"
 }
+###
+POST https://eveningpopcorn.dev/api/v1/auth/social/login
+Content-Type: application/json
+
+{
+  "oauth_type": "apple",
+  "auth_code": "cf856110600a249fd93c68387f52c0fc7.0.rvqy.rrlqe_RWNcKLbM2piW_GYA"
+}
+
+###
+POST http://localhost:8080/api/v1/auth/social/login
+Content-Type: application/json
+
+{
+  "oauth_type": "google",
+  "auth_code": "4/0AWtgzh7ZplBsoeG-q3QWvY0cGH88sejYcMHzcBEOHLFrJURcKmNbWxiKs4vw5OH79OpVeg"
+}
