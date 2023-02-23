@@ -20,6 +20,7 @@ jobs:
           docker image tag $IMAGE_NAME:$TAG registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
           docker push registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
   deploy:
+    needs: build
     name: Deploy api-gateway to K8s
     runs-on: self-hosted
     steps:
