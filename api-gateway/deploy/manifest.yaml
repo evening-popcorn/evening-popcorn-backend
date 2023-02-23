@@ -21,6 +21,31 @@ spec:
           ports:
             - containerPort: 8080
               name: fastapi
+          env:
+            - name: POSTGRES_CONFIG__SSL
+              value: True
+          envFrom:
+            - secretRef:
+                name: do-postgres-secrets
+            - configMapRef:
+                name: do-postgres-config
+            - secretRef:
+                name: google-sign-in-secrets
+            - configMapRef:
+                name: google-sign-in-config
+            - secretRef:
+                name: apple-sign-in-secrets
+            - configMapRef:
+                name: apple-sign-in-config
+      initContainers:
+        - name: postgres-migrations
+          image: registry.digitalocean.com/evening-popcorn-registry/api-gateway:latest
+          command: [ "aerich", "upgrade" ]
+          envFrom:
+            - secretRef:
+                name: do-postgres-secrets
+            - configMapRef:
+                name: do-postgres-config
 ---
 apiVersion: v1
 kind: Service
@@ -48,13 +73,13 @@ spec:
         - eveningpopcorn.dev
       secretName: api-gateway-tls
   rules:
-  - host: "eveningpopcorn.dev"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/api"
-        backend:
-          service:
-            name: api-gateway-service
-            port:
-              number: 80
+    - host: "eveningpopcorn.dev"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/api"
+            backend:
+              service:
+                name: api-gateway-service
+                port:
+                  number: 80
