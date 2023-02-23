@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "ep-client"
+version = "0.1.0"
+description = ""
+authors = ["bitizen248 <van4011@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "ep_client"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
