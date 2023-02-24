@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/api/v1/movie/161
+GET https://eveningpopcorn.dev/api/v1/movie/161
 Content-Type: application/json
-X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
 

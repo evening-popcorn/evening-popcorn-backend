@@ -1,3 +1,3 @@
-/api-gateway/.env
+.env
 /api-gateway/*.p8
 /moviegeek/http-client.env.json

@@ -4,10 +4,10 @@ from datetime import timedelta
 from typing import Optional
 
 from dotenv import load_dotenv
+from ep_utils.config_model import ConfigModel
 from pydantic import PrivateAttr
 
 from src.utils.apple_secret_generator import generate_apple_client_secret
-from src.utils.config_model import ConfigModel
 
 load_dotenv()
 
@@ -37,21 +37,6 @@ TORTOISE_ORM = {
         },
     },
 }
-
-
-class MongoConfig(ConfigModel):
-    protocol: str = "mongo"
-    user: str
-    pwd: str
-    host: str
-    port: Optional[int] = 27017
-    db_name: str
-
-    def get_connection_url(self):
-        return f"{self.protocol}://{self.user}:{self.pwd}@{self.host}:{self.port}/{self.db_name}?authSource=admin"
-
-
-MONGO_CONFIG = MongoConfig()
 
 
 class AppleSighInConfig(ConfigModel):
@@ -100,7 +85,6 @@ GOOGLE_AUTH_CONFIG = GoogleAuthConfig()
 if __name__ == "__main__":
     configs = [
         PostgresConfig.get_fields_defaults(),
-        MongoConfig.get_fields_defaults(),
         AppleSighInConfig.get_fields_defaults(),
         GoogleAuthConfig.get_fields_defaults(),
     ]
