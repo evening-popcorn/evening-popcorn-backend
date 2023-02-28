@@ -6,4 +6,4 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-root
 
-CMD python -m src.main
+CMD python -m api_gateway.main

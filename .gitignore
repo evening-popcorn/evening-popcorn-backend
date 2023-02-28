@@ -1,3 +1,4 @@
 .env
 /api-gateway/*.p8
 /moviegeek/http-client.env.json
+/moviegeek/.idea/httpRequests/*

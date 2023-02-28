@@ -7,4 +7,4 @@ RUN /root/.local/bin/poetry config virtualenvs.create false
 RUN /root/.local/bin/poetry install
 
 EXPOSE 8080
-CMD python src/main.py
+CMD python api_gateway/main.py
