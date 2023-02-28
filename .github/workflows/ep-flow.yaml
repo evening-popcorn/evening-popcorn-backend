@@ -57,7 +57,7 @@ jobs:
           kubectl apply -f api-gateway/deploy/manifest.yaml
           kubectl rollout restart deployment/moviegeek-deployment
   deploy-api-gateway:
-    needs: deploy-moviegeek
+    needs: [deploy-moviegeek, build-api-gateway]
     name: Deploy api-gateway to K8s
     runs-on: self-hosted
     steps:
