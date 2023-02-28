@@ -13,7 +13,9 @@ class MovieGeekClient:
         )
 
     async def get_movie(self, movie_id: int, locale: str) -> MovieInfo:
-        res = await self.client.get(f"/v1/movie/{movie_id}")
+        res = await self.client.get(f"/v1/movie/{movie_id}", params={
+            "locale": locale
+        })
         if res.status_code == 200:
             return MovieInfo(**res.json())
 
