@@ -1,9 +1,7 @@
-FROM python:3.11
+FROM registry.digitalocean.com/evening-popcorn-registry/ep-base:latest
 WORKDIR /app
 COPY ./ /app
 
-RUN pip install poetry
-RUN poetry config virtualenvs.create false
 RUN poetry install --no-root
 
-CMD python -m src.main
+CMD python -m api_gateway.main

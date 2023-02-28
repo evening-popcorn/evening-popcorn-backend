@@ -1,0 +1,68 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-base:
+    name: Build base image
+    runs-on: self-hosted
+    env:
+      IMAGE_NAME: ep-base
+      TAG: latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Building image
+        run: |
+          docker build -f base_image/Dockerfile . -t $IMAGE_NAME:$TAG
+          docker image tag $IMAGE_NAME:$TAG registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
+          docker push registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
+  build-api-gateway:
+    needs: build-base
+    name: Build api-gateway image
+    runs-on: self-hosted
+    env:
+      IMAGE_NAME: api-gateway
+      TAG: latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Building image
+        run: |
+          cd api-gateway
+          docker build -t $IMAGE_NAME:$TAG .
+          docker image tag $IMAGE_NAME:$TAG registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
+          docker push registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
+  build-moviegeek:
+    needs: build-base
+    name: Build moviegeek image
+    runs-on: self-hosted
+    env:
+      IMAGE_NAME: moviegeek
+      TAG: latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Building image
+        run: |
+          cd moviegeek
+          docker build -t $IMAGE_NAME:$TAG .
+          docker image tag $IMAGE_NAME:$TAG registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
+          docker push registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
+  deploy-moviegeek:
+    needs: build-moviegeek
+    name: Deploy api-gateway to K8s
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to K8s
+        run: |
+          kubectl apply -f api-gateway/deploy/manifest.yaml
+          kubectl rollout restart deployment/moviegeek-deployment
+  deploy-api-gateway:
+    needs: deploy-moviegeek
+    name: Deploy api-gateway to K8s
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to K8s
+        run: |
+          kubectl apply -f api-gateway/deploy/manifest.yaml
+          kubectl rollout restart deployment/api-gateway-deployment

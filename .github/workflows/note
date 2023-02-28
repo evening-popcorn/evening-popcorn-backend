@@ -1,0 +1,1 @@
+docker build -f base_image/Dockerfile . -t ep-base

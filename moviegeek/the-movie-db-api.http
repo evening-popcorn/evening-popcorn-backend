@@ -2,7 +2,7 @@ GET https://api.themoviedb.org/3/search/movie?api_key={{API_KEY}}&language=ru&qu
 
 ###
 
-GET https://api.themoviedb.org/3/movie/161?api_key={{API_KEY}}&language=ru
+GET https://api.themoviedb.org/3/movie/161?api_key={{API_KEY}}&language=ru&append_to_response=watch/providers,
 ###
 GET https://api.themoviedb.org/3/movie/161/videos?api_key={{API_KEY}}&language=ru
 ###

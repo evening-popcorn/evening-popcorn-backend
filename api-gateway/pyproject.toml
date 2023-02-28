@@ -19,7 +19,7 @@ aerich = "^0.7.1"
 
 
 [tool.aerich]
-tortoise_orm = "src.config.TORTOISE_ORM"
+tortoise_orm = "api_gateway.config.TORTOISE_ORM"
 location = "./migrations"
 src_folder = "./."
 [build-system]
