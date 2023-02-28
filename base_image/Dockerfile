@@ -1,5 +1,6 @@
 FROM python:3.11
 COPY ep_client /lib/ep_client
+COPY ep_utils /lib/ep_client
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
 
