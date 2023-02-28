@@ -21,6 +21,9 @@ spec:
           ports:
             - containerPort: 8080
               name: fastapi
+          env:
+            - name: CLIENT_MOVIEGEEK_URL
+              value: http://moviegeek-service.default
           envFrom:
             - secretRef:
                 name: do-postgres-secrets

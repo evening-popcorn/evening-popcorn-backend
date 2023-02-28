@@ -12,7 +12,7 @@ Content-Type: application/json
 X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
 
 ###
-GET https://eveningpopcorn.dev/api/v1/movie/162
+GET https://eveningpopcorn.dev/api/v1/movie/161
 Content-Type: application/json
 X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
 
