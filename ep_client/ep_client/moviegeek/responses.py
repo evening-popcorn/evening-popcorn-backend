@@ -33,3 +33,17 @@ class MovieInfo(BaseModel):
     providers: List[WatchProvider]
     overview: Optional[str]
     cast: List[Cast]
+
+
+class SearchMovieInfo(BaseModel):
+    id: int
+    title: Optional[str]
+    poster: Optional[str]
+    original_title: Optional[str]
+    release_date: Optional[str]
+
+
+class MovieSearchResult(BaseModel):
+    page: int
+    result: List[SearchMovieInfo]
+    total_pages: int

@@ -98,3 +98,27 @@ class Movie(BaseModel):
 
     watch_providers: Optional[List[WatchProvider]] = None
     credits: Optional[Credits] = None
+
+
+class Result(BaseModel):
+    adult: Optional[bool]
+    backdrop_path: Optional[str]
+    genre_ids: Optional[List[int]]
+    id: Optional[int]
+    original_language: Optional[str]
+    original_title: Optional[str]
+    overview: Optional[str]
+    popularity: Optional[float]
+    poster_path: Optional[str]
+    release_date: Optional[str]
+    title: Optional[str]
+    video: Optional[bool]
+    vote_average: Optional[float]
+    vote_count: Optional[int]
+
+
+class MovieSearchResult(BaseModel):
+    page: Optional[int] = None
+    results: Optional[List[Result]] = None
+    total_pages: Optional[int] = None
+    total_results: Optional[int] = None
