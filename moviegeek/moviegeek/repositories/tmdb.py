@@ -45,7 +45,7 @@ class TMDBRepository:
             if res.status_code != 200:
                 raise RuntimeError
             obj = res.json()
-            providers = obj["watch/providers"]["results"][locale.upper()]
+            providers = obj["watch/providers"]["results"].get(locale.upper(), [])
             watch_providers = (
                     providers.get("flatrate", [])
                     + providers.get("rent", [])
