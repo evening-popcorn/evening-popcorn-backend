@@ -63,15 +63,22 @@ class TMDBRepository:
                 providers_map.values(),
                 key=lambda el: el["display_priority"]
             )
-            obj["_id"] = f"{movie_id}/{locale}"
-            obj["store_until"] = datetime.now() + timedelta(days=7)
             parsed_obj = Movie(**obj)
             if create:
-                await self.mongo_connection["movies_cache"].insert_one(parsed_obj.dict())
+                await self.mongo_connection["movies_cache"].insert_one(
+                    {
+                        "_id": f"{movie_id}/{locale}",
+                        "store_until": datetime.now() + timedelta(days=7),
+                        **parsed_obj.dict()
+                    }
+                )
             else:
                 await self.mongo_connection["movies_cache"].replace_one(
                     {"_id": f"{movie_id}/{locale}"},
-                    parsed_obj.dict()
+                    {
+                        "store_until": datetime.now() + timedelta(days=7),
+                        **parsed_obj.dict()
+                    }
                 )
             return parsed_obj
 
