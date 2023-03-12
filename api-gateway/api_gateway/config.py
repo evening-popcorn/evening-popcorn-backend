@@ -5,27 +5,13 @@ from typing import Optional
 
 from dotenv import load_dotenv
 from ep_utils.config_model import ConfigModel
+from ep_utils.configs import PostgresConfig
 from pydantic import PrivateAttr
 
 from api_gateway.utils.apple_secret_generator import \
     generate_apple_client_secret
 
 load_dotenv()
-
-
-class PostgresConfig(ConfigModel):
-    user: str
-    pwd: str
-    host: str
-    port: int = 5432
-    db_name: str = ""
-    ssl: bool = False
-
-    def get_connection_url(self):
-        string = f"postgres://{self.user}:{self.pwd}@{self.host}:{self.port}/{self.db_name}"
-        if self.ssl:
-            string += "?sslmode=require"
-        return string
 
 
 POSTGRES_CONFIG = PostgresConfig()
