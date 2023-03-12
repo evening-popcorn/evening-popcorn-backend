@@ -10,11 +10,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from moviegeek.config import TMDB_CONFIG
 from moviegeek.depends.mongodb_connection import mongodb_connection
 from moviegeek.repositories.dto.tmdb import Movie
-
-
-class MovieAdditionalInfo(StrEnum):
-    watch_providers = "watch/providers"
-    credits = ""
+from moviegeek.repositories.dto.tmdb import MovieSearchResult
 
 
 class TMDBRepository:
@@ -49,7 +45,7 @@ class TMDBRepository:
             if res.status_code != 200:
                 raise RuntimeError
             obj = res.json()
-            providers = obj["watch/providers"]["results"][locale.upper()]
+            providers = obj["watch/providers"]["results"].get(locale.upper(), dict())
             watch_providers = (
                     providers.get("flatrate", [])
                     + providers.get("rent", [])
@@ -84,3 +80,20 @@ class TMDBRepository:
 
         obj["id"] = int(obj["_id"].split("/")[0])
         return Movie(**obj)
+
+    async def search_movie(
+        self, query: str, locale: str, page: int
+    ) -> MovieSearchResult:
+        params = {
+                "query": query,
+                "language": locale,
+            }
+        if page > 1:
+            params["page"] = page
+        res = await self.client.get(
+            "search/movie",
+            params=params
+        )
+        if res.status_code != 200:
+            raise RuntimeError
+        return MovieSearchResult(**res.json())
