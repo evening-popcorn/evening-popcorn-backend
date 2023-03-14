@@ -15,4 +15,10 @@ X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
 GET https://eveningpopcorn.dev/api/v1/movie/162
 Content-Type: application/json
 X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
+X-Language: ES
+###
+GET https://eveningpopcorn.dev/api/v1/movie/search?q=11+друзей
+Content-Type: application/json
+X-Token: oV3cfPdbZ178SAPDULEOnFNpQB5iJHdoQ3GwJjKHCdDyRVf5GDCrEn7oWbPWExRx
+X-Language: RU
 

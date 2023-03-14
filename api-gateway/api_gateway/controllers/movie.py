@@ -40,6 +40,21 @@ class MovieInfo(BaseModel):
     cast: List[Cast]
 
 
+class SearchMovieInfo(BaseModel):
+    id: int
+    title: Optional[str]
+    poster: Optional[str]
+    original_title: Optional[str]
+    release_date: Optional[str]
+    in_backlog: bool
+
+
+class MovieSearchResult(BaseModel):
+    page: int
+    result: List[SearchMovieInfo]
+    total_pages: int
+
+
 class MoviesController:
 
     def __init__(
@@ -96,4 +111,39 @@ class MoviesController:
                 )
                 for cast in movie_info.cast
             ],
+        )
+
+    async def search_movie(
+        self, query: str,
+        page: int,
+        user_id: uuid.uuid4,
+        locale: str,
+    ) -> MovieSearchResult:
+        search_res = await self.movies_repository.search_movie(
+            q=query,
+            page=page,
+            locale=locale
+        )
+        statuses = await self.backlog_repository.bulk_get_movie_status(
+            user_id=user_id,
+            movie_ids=list(map(lambda movie: movie.id, search_res.result))
+        )
+        statuses_dict = {
+            status.movie_id: status
+            for status in statuses
+        }
+        return MovieSearchResult(
+            page=search_res.page,
+            result=[
+                SearchMovieInfo(
+                    id=movie.id,
+                    title=movie.title,
+                    poster=movie.poster,
+                    original_title=movie.original_title,
+                    release_date=movie.release_date,
+                    in_backlog=statuses_dict[movie.id].in_backlog,
+                )
+                for movie in search_res.result
+            ],
+            total_pages=search_res.total_pages,
         )

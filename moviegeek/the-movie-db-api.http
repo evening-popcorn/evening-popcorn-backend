@@ -9,3 +9,7 @@ GET https://api.themoviedb.org/3/movie/161/videos?api_key={{API_KEY}}&language=r
 GET https://api.themoviedb.org/3/movie/161/credits?api_key={{API_KEY}}&language=ru
 ###
 GET https://api.themoviedb.org/3/movie/161/watch/providers?api_key={{API_KEY}}&language=ru
+###
+GET https://api.themoviedb.org/3/search/movie?api_key={{API_KEY}}&query=друзей&language=ru&page=2
+###
+GET https://api.themoviedb.org/3/movie/popular?api_key={{API_KEY}}
