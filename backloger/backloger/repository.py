@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Tuple
 from uuid import UUID
 from enum import StrEnum
 from typing import Dict
@@ -22,6 +23,15 @@ class BacklogRepository:
     def __init__(self, pg_conn: Connection = Depends(pg_connection)) -> None:
         self.pg_conn = pg_conn
 
+    async def get_user_backlog_size(self, user_id: UUID) -> int:
+        sql = """
+            SELECT count(*) as size
+            FROM users_backlog
+            WHERE user_id = $1
+        """
+        res = await self.pg_conn.fetch(sql, user_id)
+        return res[0]["size"]
+
     async def get_users_backlog(
         self,
         user_id: UUID,
@@ -29,7 +39,7 @@ class BacklogRepository:
         offset: int = 0,
         order_by: BacklogOrder = BacklogOrder.added_at_asc
     ) -> List[UserBacklogDto]:
-        sql = f"""
+        sql = """
             SELECT movie_id, note
             FROM users_backlog
             WHERE user_id = $1
@@ -50,17 +60,17 @@ class BacklogRepository:
         self,
         user_id: UUID,
         movie_ids: List[int]
-    ) -> Dict[int, bool]:
-        sql = f"""
-            SELECT movie_id
+    ) -> Dict[int, Tuple[bool, str]]:
+        sql = """
+            SELECT movie_id, note
             FROM users_backlog
             WHERE user_id = $1 
                 and movie_id = any($2::int[])
         """
         res = await self.pg_conn.fetch(sql, user_id, movie_ids)
-        backlog = {movie["movie_id"] for movie in res}
+        backlog = {movie["movie_id"]: movie["note"] for movie in res}
         return {
-            movie_id: movie_id in backlog
+            movie_id: ((movie_id in backlog), backlog.get(movie_id))
             for movie_id in movie_ids
         }
 
@@ -81,6 +91,23 @@ class BacklogRepository:
         except UniqueViolationError:
             return False
         return True
+
+    async def update_note_in_backlog(
+        self,
+        user_id: UUID,
+        movie_id: int,
+        note: str
+    ) -> bool:
+        sql = """
+            UPDATE public.users_backlog
+            SET note = $1
+            WHERE user_id = $2
+              AND movie_id = $3;
+        """
+        res = await self.pg_conn.execute(
+            sql, note, user_id, movie_id,
+        )
+        return res.split()[-1] == "1"
 
     async def remove_from_backlog(
         self,
