@@ -64,6 +64,15 @@ class BacklogController:
             )
         return res
 
+    async def delete_from_backlog(
+        self, user_id: UUID, movie_id: int,
+    ) -> bool:
+        res = await self.backlog_repository.remove_from_backlog(
+            user_id=user_id,
+            movie_id=movie_id,
+        )
+        return res
+
     async def check_is_movie_in_backlog(
         self, user_id: UUID, movie_ids: List[int]
     ) -> Dict[str, BacklogCheck]:

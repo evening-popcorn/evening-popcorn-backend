@@ -1,4 +1,4 @@
 
-GET http://localhost:8081/v1/movie/162
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165&locale=RU
 
 

@@ -12,6 +12,15 @@ Content-Type: application/json
 X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
 
 ###
+GET localhost:8080/api/v1/movie/161
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+###
+GET localhost:8080/openapi.json
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+
+###
 GET https://eveningpopcorn.dev/api/v1/movie/162
 Content-Type: application/json
 X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
@@ -21,4 +30,29 @@ GET https://eveningpopcorn.dev/api/v1/movie/search?q=11+друзей
 Content-Type: application/json
 X-Token: oV3cfPdbZ178SAPDULEOnFNpQB5iJHdoQ3GwJjKHCdDyRVf5GDCrEn7oWbPWExRx
 X-Language: RU
+###
+GET localhost:8080/api/v1/movie/search?q=11+друзей
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+###
+GET localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
 
+###
+POST localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+{
+  "movie_id": 162,
+  "note": "asdasd"
+}
+###
+DELETE localhost:8080/api/v1/backlog?movie_id=150
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU

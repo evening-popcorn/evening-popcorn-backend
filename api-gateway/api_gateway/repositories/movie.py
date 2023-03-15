@@ -1,4 +1,8 @@
+from typing import Dict
+from typing import List
+
 from fastapi import Depends
+from ep_client.moviegeek.responses import SearchMovieInfo
 from ep_client.moviegeek.client import MovieGeekClient
 from ep_client.moviegeek.responses import MovieInfo
 from ep_client.moviegeek.responses import MovieSearchResult
@@ -15,6 +19,16 @@ class MoviesRepository:
     ) -> MovieInfo:
         return await self.moviegeek_client.get_movie(movie_id=movie_id,
                                                      locale=locale)
+
+    async def get_movies_info(
+        self,
+        movie_ids: List[int],
+        locale: str,
+    ) -> Dict[int, SearchMovieInfo]:
+        return await self.moviegeek_client.get_movies(
+            movie_ids=movie_ids,
+            locale=locale,
+        )
 
     async def search_movie(
         self, q: str,

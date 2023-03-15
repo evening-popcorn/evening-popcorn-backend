@@ -35,6 +35,7 @@ class MovieInfo(BaseModel):
     length: int
     adult: bool
     in_backlog: bool
+    backlog_note: str
     providers: List[WatchProvider]
     overview: str
     cast: List[Cast]
@@ -47,6 +48,7 @@ class SearchMovieInfo(BaseModel):
     original_title: Optional[str]
     release_date: Optional[str]
     in_backlog: bool
+    backlog_note: Optional[str]
 
 
 class MovieSearchResult(BaseModel):
@@ -95,6 +97,7 @@ class MoviesController:
             length=movie_info.length,
             adult=movie_info.adult,
             in_backlog=backlog_status.in_backlog,
+            backlog_note=backlog_status.note,
             providers=[
                 WatchProvider(
                     logo=provider.logo,
@@ -128,10 +131,6 @@ class MoviesController:
             user_id=user_id,
             movie_ids=list(map(lambda movie: movie.id, search_res.result))
         )
-        statuses_dict = {
-            status.movie_id: status
-            for status in statuses
-        }
         return MovieSearchResult(
             page=search_res.page,
             result=[
@@ -141,7 +140,8 @@ class MoviesController:
                     poster=movie.poster,
                     original_title=movie.original_title,
                     release_date=movie.release_date,
-                    in_backlog=statuses_dict[movie.id].in_backlog,
+                    in_backlog=statuses[movie.id].in_backlog,
+                    backlog_note=statuses[movie.id].note
                 )
                 for movie in search_res.result
             ],

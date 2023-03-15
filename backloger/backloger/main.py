@@ -1,4 +1,3 @@
-import uuid
 from typing import Dict
 from typing import List
 
@@ -10,7 +9,6 @@ from fastapi import Body
 from fastapi import Depends
 from fastapi import FastAPI
 from fastapi import Query
-from fastapi.params import Param
 
 from uuid import UUID
 
@@ -43,6 +41,20 @@ async def add_to_backlog(
             user_id=user_id,
             movie_id=movie_id,
             note=note,
+        )
+    )
+
+
+@app.delete("/v1/user-backlog")
+async def delete_from_backlog(
+    user_id: UUID = Query(),
+    movie_id: int = Query(),
+    controller: BacklogController = Depends()
+) -> SimpleResponse:
+    return SimpleResponse(
+        success=await controller.delete_from_backlog(
+            user_id=user_id,
+            movie_id=movie_id,
         )
     )
 
