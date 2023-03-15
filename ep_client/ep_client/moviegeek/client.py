@@ -1,9 +1,12 @@
 import os
+from typing import Dict
+from typing import List
 
 import httpx
 
 from ep_client.moviegeek.responses import MovieInfo
 from ep_client.moviegeek.responses import MovieSearchResult
+from ep_client.moviegeek.responses import SearchMovieInfo
 
 
 class MovieGeekClient:
@@ -19,6 +22,20 @@ class MovieGeekClient:
         })
         if res.status_code == 200:
             return MovieInfo(**res.json())
+
+    async def get_movies(
+        self,
+        movie_ids: List[int], locale: str
+    ) -> Dict[int, SearchMovieInfo]:
+        res = await self.client.get(f"/v1/movie/bulk", params={
+            "movie_ids": movie_ids,
+            "locale": locale
+        })
+        if res.status_code == 200:
+            return {
+                int(movie_id): SearchMovieInfo(**info)
+                for movie_id, info in res.json().items()
+            }
 
     async def search_movie(
         self,

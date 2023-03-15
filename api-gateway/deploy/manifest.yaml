@@ -24,6 +24,8 @@ spec:
           env:
             - name: CLIENT_MOVIEGEEK_URL
               value: http://moviegeek-service.default
+            - name: CLIENT_BACKLOGER_URL
+              value: http://backloger-service.default
           envFrom:
             - secretRef:
                 name: do-postgres-secrets

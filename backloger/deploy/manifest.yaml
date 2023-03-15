@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backloger-deployment
+  labels:
+    app: backloger
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backloger
+  template:
+    metadata:
+      labels:
+        app: backloger
+    spec:
+      containers:
+        - image: registry.digitalocean.com/evening-popcorn-registry/backloger:latest
+          imagePullPolicy: Always
+          name: backloger-container
+          ports:
+            - containerPort: 8082
+              name: fastapi
+          envFrom:
+            - secretRef:
+                name: do-postgres-secrets
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backloger-service
+spec:
+  type: ClusterIP
+  selector:
+    app: backloger
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8082
