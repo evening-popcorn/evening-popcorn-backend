@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import Header
-from fastapi.params import Param
+from fastapi import Query
 
 from api_gateway.controllers.movie import MovieInfo
 from api_gateway.controllers.movie import MovieSearchResult
@@ -14,8 +14,8 @@ router = APIRouter()
 
 @router.get("/search")
 async def search_movie(
-    q: str = Param(min_length=3),
-    page: int = Param(ge=1, default=1),
+    q: str = Query(min_length=3),
+    page: int = Query(ge=1, default=1),
     user: UserDto = Depends(auth_user),
     movie_controller: MoviesController = Depends(),
     x_language: str = Header(default="RU")

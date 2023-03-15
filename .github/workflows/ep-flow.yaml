@@ -46,18 +46,43 @@ jobs:
           docker build -t $IMAGE_NAME:$TAG .
           docker image tag $IMAGE_NAME:$TAG registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
           docker push registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
+  build-backloger:
+    needs: build-base
+    name: Build backloger image
+    runs-on: self-hosted
+    env:
+      IMAGE_NAME: backloger
+      TAG: latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Building image
+        run: |
+          cd backloger
+          docker build -t $IMAGE_NAME:$TAG .
+          docker image tag $IMAGE_NAME:$TAG registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
+          docker push registry.digitalocean.com/${{ vars.REGISTRY_NAME }}/$IMAGE_NAME:$TAG
   deploy-moviegeek:
     needs: build-moviegeek
-    name: Deploy api-gateway to K8s
+    name: Deploy moviegeek to K8s
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: Deploy to K8s
         run: |
-          kubectl apply -f api-gateway/deploy/manifest.yaml
+          kubectl apply -f moviegeek/deploy/manifest.yaml
           kubectl rollout restart deployment/moviegeek-deployment
+  deploy-backloger:
+    needs: build-backloger
+    name: Deploy backloger to K8s
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to K8s
+        run: |
+          kubectl apply -f backloger/deploy/manifest.yaml
+          kubectl rollout restart deployment/backloger-deployment
   deploy-api-gateway:
-    needs: [deploy-moviegeek, build-api-gateway]
+    needs: [deploy-moviegeek, deploy-backloger, build-api-gateway]
     name: Deploy api-gateway to K8s
     runs-on: self-hosted
     steps:

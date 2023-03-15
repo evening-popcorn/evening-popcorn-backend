@@ -1,10 +1,12 @@
+from uuid import UUID
+
 from pydantic import BaseModel
 
 from api_gateway.models.user import Users
 
 
 class UserDto(BaseModel):
-    id: str
+    id: UUID
     email: str
     name: str
 

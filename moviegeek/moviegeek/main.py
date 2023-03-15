@@ -1,7 +1,9 @@
+from typing import List
+
 import uvicorn
 from fastapi import Depends
 from fastapi import FastAPI
-from fastapi.params import Param
+from fastapi.params import Query
 
 from ep_client.moviegeek.responses import MovieInfo
 from ep_client.moviegeek.responses import MovieSearchResult
@@ -12,9 +14,9 @@ app = FastAPI()
 
 @app.get("/v1/movie/search")
 async def search_movie(
-    q: str = Param(),
-    page: int = Param(default=1),
-    locale: str = Param(),
+    q: str = Query(),
+    page: int = Query(default=1),
+    locale: str = Query(),
     movie_controller: MoviesController = Depends(),
 ) -> MovieSearchResult:
     return await movie_controller.search_movie(
@@ -24,10 +26,22 @@ async def search_movie(
     )
 
 
+@app.get("/v1/movie/bulk")
+async def search_movie(
+    movie_ids: List[int] = Query(),
+    locale: str = Query(),
+    movie_controller: MoviesController = Depends(),
+):
+    return await movie_controller.get_movies(
+        movie_ids=movie_ids,
+        locale=locale,
+    )
+
+
 @app.get("/v1/movie/{movie_id}")
 async def get_movie_info(
     movie_id: int,
-    locale: str = Param(),
+    locale: str = Query(),
     movie_controller: MoviesController = Depends(),
 ) -> MovieInfo:
     return await movie_controller.get_movie(
