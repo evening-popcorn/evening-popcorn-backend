@@ -17,7 +17,7 @@ spec:
       containers:
         - image: registry.digitalocean.com/evening-popcorn-registry/moviegeek:latest
           imagePullPolicy: Always
-          name: sample-container
+          name: moviegeek-container
           ports:
             - containerPort: 8081
               name: fastapi
