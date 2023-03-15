@@ -28,7 +28,7 @@ spec:
                 name: do-postgres-config
       initContainers:
         - name: postgres-migrations
-          image: registry.digitalocean.com/evening-popcorn-registry/api-backloger:latest
+          image: registry.digitalocean.com/evening-popcorn-registry/backloger:latest
           command: [ "python", "run_migrations.py" ]
           envFrom:
             - secretRef:

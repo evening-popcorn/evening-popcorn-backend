@@ -1,0 +1,483 @@
+GET https://eveningpopcorn.dev/api/v1/backlog/
+Content-Type: application/json
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
+X-Language: RU
+
+<> 2023-03-15T201314.200.json
+
+###
+
+POST https://eveningpopcorn.dev/api/v1/backlog/
+Content-Type: application/json
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
+X-Language: RU
+
+{
+  "movie_id": 162,
+  "note": "asdasd"
+}
+
+<> 2023-03-15T201311.200.json
+
+###
+
+GET https://eveningpopcorn.dev/api/v1/backlog/
+Content-Type: application/json
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
+X-Language: RU
+
+<> 2023-03-15T201302.200.json
+
+###
+
+POST https://eveningpopcorn.dev/api/v1/backlog/
+Content-Type: application/json
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
+X-Language: RU
+
+{
+  "movie_id": 161,
+  "note": "asdasd"
+}
+
+<> 2023-03-15T201257.200.json
+
+###
+
+POST https://eveningpopcorn.dev/api/v1/backlog/
+Content-Type: application/json
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
+X-Language: RU
+
+{
+  "movie_id": 161,
+  "note": "asdasd"
+}
+
+<> 2023-03-15T200531.500.txt
+
+###
+
+GET https://eveningpopcorn.dev/api/v1/backlog/
+Content-Type: application/json
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
+X-Language: RU
+
+<> 2023-03-15T200433.500.txt
+
+###
+
+GET http://localhost:8080/api/v1/movie/search?q=11 друзей
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T200306.200.json
+
+###
+
+GET https://eveningpopcorn.dev/api/v1/movie/search?q=11 друзей
+Content-Type: application/json
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
+X-Language: RU
+
+<> 2023-03-15T200255.500.txt
+
+###
+
+GET https://eveningpopcorn.dev/api/v1/movie/search?q=11 друзей
+Content-Type: application/json
+X-Token: oV3cfPdbZ178SAPDULEOnFNpQB5iJHdoQ3GwJjKHCdDyRVf5GDCrEn7oWbPWExRx
+X-Language: RU
+
+<> 2023-03-15T200241.401.json
+
+###
+
+DELETE http://localhost:8080/api/v1/backlog?movie_id=150
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T200156.200.json
+
+###
+
+GET http://localhost:8080/api/v1/movie/161
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+
+<> 2023-03-15T200033.200.json
+
+###
+
+GET http://localhost:8080/openapi.json
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+
+<> 2023-03-15T193401.200.json
+
+###
+
+GET http://localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T193125.200.json
+
+###
+
+POST http://localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+{
+  "movie_id": 162,
+  "note": "asdasd"
+}
+
+<> 2023-03-15T193123.200.json
+
+###
+
+GET http://localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T193118.200.json
+
+###
+
+DELETE http://localhost:8080/api/v1/backlog?movie_id=150
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T193110.200.json
+
+###
+
+DELETE http://localhost:8080/api/v1/backlog?movie_id=150
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T193034.500.txt
+
+###
+
+GET http://localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T192953.200.json
+
+###
+
+POST http://localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+{
+  "movie_id": 162,
+  "note": "ЗАметка"
+}
+
+<> 2023-03-15T192945.200.json
+
+###
+
+POST http://localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+{
+  "movie_id": 162,
+  "note": "ЗАметка"
+}
+
+<> 2023-03-15T192851.500.txt
+
+###
+
+POST http://localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+{
+  "movie_id": 162,
+  "note": "ЗАметка"
+}
+
+<> 2023-03-15T192843.405.json
+
+###
+
+GET http://localhost:8080/api/v1/backlog
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T192125.200.json
+
+###
+
+GET http://localhost:8080/api/v1/movie/search?q=11 друзей
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T181040.200.json
+
+###
+
+GET http://localhost:8080/api/v1/movie/search?q=11 друзей
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-15T181035.200.json
+
+###
+
+GET http://localhost:8080/api/v1/movie/161
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+
+<> 2023-03-15T180556.200.json
+
+###
+
+GET http://localhost:8080/api/v1/movie/161
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+
+<> 2023-03-15T180516.500.txt
+
+###
+
+GET http://localhost:8080/api/v1/movie/161
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+
+<> 2023-03-15T180436.500.txt
+
+###
+
+GET https://eveningpopcorn.dev/api/v1/movie/161
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+
+<> 2023-03-15T180421.401.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165,0&locale=RU
+
+<> 2023-03-15T165120.422.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165,0&locale=RU
+
+<> 2023-03-15T165117.422.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165&movie_ids=0&locale=RU
+
+<> 2023-03-15T165040.200.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165&movie_ids=3&locale=RU
+
+<> 2023-03-15T165035.200.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165&movie_ids=3&locale=RU
+
+<> 2023-03-15T164750.200.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165&movie_ids=3&locale=RU
+
+<> 2023-03-15T164736.200.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165&movie_ids=1&locale=RU
+
+<> 2023-03-15T164641.500.txt
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165&movie_ids=0&locale=RU
+
+<> 2023-03-15T164637.500.txt
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165&movie_ids=163&locale=RU
+
+<> 2023-03-15T164455.200.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=161&movie_ids=162&movie_ids=162&movie_ids=162&movie_ids=162&movie_ids=162&movie_ids=162&movie_ids=162&movie_ids=162&movie_ids=162&locale=RU
+
+<> 2023-03-15T164429.200.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=161&movie_ids=162&locale=RU
+
+<> 2023-03-15T164412.200.json
+
+###
+
+GET http://localhost:8081/v1/movie/bulk?movie_ids=161&movie_ids=162
+
+<> 2023-03-15T164358.422.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "126"
+}
+
+<> 2023-03-15T162841.200.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "126"
+}
+
+<> 2023-03-15T162839.200.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "126"
+}
+
+<> 2023-03-15T162838.200.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "126"
+}
+
+<> 2023-03-15T162837.200.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "126"
+}
+
+<> 2023-03-15T162835.200.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "126"
+}
+
+<> 2023-03-15T162834.200.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "126"
+}
+
+<> 2023-03-15T162831.200.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "126"
+}
+
+<> 2023-03-15T162546.200.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "123"
+}
+
+<> 2023-03-15T162459.200.json
+
+###
+
+POST http://localhost:8082/v1/user-backlog
+Content-Type: application/json
+
+{
+  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "movie_id": 150,
+  "note": "123"
+}
+
+<> 2023-03-14T194740.200.json
+
+###
+
