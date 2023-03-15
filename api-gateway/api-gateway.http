@@ -28,7 +28,7 @@ X-Language: ES
 ###
 GET https://eveningpopcorn.dev/api/v1/movie/search?q=11+друзей
 Content-Type: application/json
-X-Token: oV3cfPdbZ178SAPDULEOnFNpQB5iJHdoQ3GwJjKHCdDyRVf5GDCrEn7oWbPWExRx
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
 X-Language: RU
 ###
 GET localhost:8080/api/v1/movie/search?q=11+друзей
@@ -36,19 +36,19 @@ Content-Type: application/json
 X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
 X-Language: RU
 ###
-GET localhost:8080/api/v1/backlog
+GET https://eveningpopcorn.dev/api/v1/backlog/
 Content-Type: application/json
-X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
 X-Language: RU
 
 ###
-POST localhost:8080/api/v1/backlog
+POST https://eveningpopcorn.dev/api/v1/backlog/
 Content-Type: application/json
-X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
 X-Language: RU
 
 {
-  "movie_id": 162,
+  "movie_id": 161,
   "note": "asdasd"
 }
 ###

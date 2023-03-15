@@ -24,6 +24,17 @@ spec:
           envFrom:
             - secretRef:
                 name: do-postgres-secrets
+            - configMapRef:
+                name: do-postgres-config
+      initContainers:
+        - name: postgres-migrations
+          image: registry.digitalocean.com/evening-popcorn-registry/api-backloger:latest
+          command: [ "python", "run_migrations.py" ]
+          envFrom:
+            - secretRef:
+                name: do-postgres-secrets
+            - configMapRef:
+                name: do-postgres-config
 
 ---
 apiVersion: v1
