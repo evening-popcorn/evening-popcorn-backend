@@ -6,7 +6,7 @@ from api_gateway.models.user import Users
 
 
 class UserDto(BaseModel):
-    id: UUID
+    id: str
     email: str
     name: str
 

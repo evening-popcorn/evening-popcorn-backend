@@ -1,3 +1,84 @@
+GET http://localhost:8080/api/v1/auth/me
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-17T190025.200.json
+
+###
+
+GET http://localhost:8080/api/v1/auth/me
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-17T185735.500.txt
+
+###
+
+GET http://localhost:8080/api/v1/auth/me
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-17T185711.500.txt
+
+###
+
+GET http://localhost:8080/api/v1/auth/me
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-17T185706.500.txt
+
+###
+
+DELETE http://localhost:8080/api/v1/backlog?movie_id=150
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-17T185559.200.json
+
+###
+
+GET http://localhost:8080/api/v1/auth/me
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-17T185512.500.txt
+
+###
+
+GET http://localhost:8080/api/v1/auth/me
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-17T185408.500.txt
+
+###
+
+GET http://localhost:8080/api/v1/auth/me
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-17T185244.500.txt
+
+###
+
+GET http://localhost:8080/api/v1/auth/me
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+<> 2023-03-17T185238.404.json
+
+###
+
 GET https://eveningpopcorn.dev/api/v1/backlog/
 Content-Type: application/json
 X-Token: KtCa1ePxTOHVEED2bEiEkdnfNzZdsLpNSbri8cRWVdN0HCcuQ9u2x3SYoNI8Wpnc
@@ -361,123 +442,6 @@ Content-Type: application/json
 }
 
 <> 2023-03-15T162841.200.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "126"
-}
-
-<> 2023-03-15T162839.200.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "126"
-}
-
-<> 2023-03-15T162838.200.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "126"
-}
-
-<> 2023-03-15T162837.200.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "126"
-}
-
-<> 2023-03-15T162835.200.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "126"
-}
-
-<> 2023-03-15T162834.200.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "126"
-}
-
-<> 2023-03-15T162831.200.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "126"
-}
-
-<> 2023-03-15T162546.200.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "123"
-}
-
-<> 2023-03-15T162459.200.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "123"
-}
-
-<> 2023-03-14T194740.200.json
 
 ###
 

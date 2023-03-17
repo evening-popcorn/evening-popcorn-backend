@@ -56,3 +56,8 @@ DELETE localhost:8080/api/v1/backlog?movie_id=150
 Content-Type: application/json
 X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
 X-Language: RU
+###
+GET localhost:8080/api/v1/auth/me
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
