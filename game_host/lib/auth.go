@@ -2,6 +2,7 @@ package lib
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -36,12 +37,19 @@ func NewAuthService() *AuthService {
 	}
 }
 func (s *AuthService) getUser(token string) (*UserInfo, error) {
-	req, err := http.NewRequest("GET", GetEnv("API_GATEWAY_URL", "http://api-gateway"), nil)
+	req, err := http.NewRequest(
+		"GET",
+		GetEnv("API_GATEWAY_URL", "http://api-gateway")+"/api/v1/auth/me",
+		nil,
+	)
 	if err != nil {
 		return nil, err
 	}
 	req.Header.Add("X-Token", token)
 	res, err := s.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	if res.StatusCode == 401 {
 		return nil, &AuthError{}
 	}
@@ -59,10 +67,15 @@ func (s *AuthService) getUser(token string) (*UserInfo, error) {
 func (s *AuthService) AuthUser(f func(w http.ResponseWriter, r *http.Request, user *UserInfo)) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		user, err := s.getUser(r.Header.Get("X-Token"))
-		switch err.(type) {
-		case *AuthError:
-		case *UnexpectedError:
-
+		if err != nil {
+			switch err.(type) {
+			case *AuthError:
+				HttpError(w, ErrorRes{Detail: "Method needs auth"}, http.StatusUnauthorized)
+			default:
+				fmt.Println(err)
+				HttpServerError(w)
+			}
+			return
 		}
 		f(w, r, user)
 	}

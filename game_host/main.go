@@ -2,12 +2,12 @@ package main
 
 import (
 	"context"
-	"encoding/json"
+	"errors"
 	"fmt"
-	"game_host/lib"
-	"game_host/repositories"
+	"github.com/joho/godotenv"
 	"github.com/redis/go-redis/v9"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -16,29 +16,29 @@ type ResID struct {
 }
 
 func main() {
-	//err := godotenv.Load()
-	//if err != nil {
-	//	panic(err)
-	//}
-	//
-	//SetupRouting()
-	//
-	//err = http.ListenAndServe(":3333", nil)
-	//if errors.Is(err, http.ErrServerClosed) {
-	//	fmt.Printf("server closed\n")
-	//} else if err != nil {
-	//	fmt.Printf("error starting server: %s\n", err)
-	//	os.Exit(1)
-	//}
-	repo := repositories.NewGameRepository()
-	res := repo.CreateGame(
-		&lib.UserInfo{Name: "Иван Дмитриев", Id: "123", Email: "van4011@gmail.com"},
-		"Test",
-	)
-	fmt.Println(res)
-	fmt.Println(repo.GetGame(res.Code))
-	repo.ChangeStatus(res.Code, "Started")
-	repo.AddLike(res.Code, "123", 161)
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
+
+	SetupRouting()
+
+	err = http.ListenAndServe(":8083", nil)
+	if errors.Is(err, http.ErrServerClosed) {
+		fmt.Printf("server closed\n")
+	} else if err != nil {
+		fmt.Printf("error starting server: %s\n", err)
+		os.Exit(1)
+	}
+	//repo := rep.NewGameRepository()
+	//res := repo.CreateGame(
+	//	&lib.UserInfo{Name: "Иван Дмитриев", Id: "123", Email: "van4011@gmail.com"},
+	//	"Test",
+	//)
+	//fmt.Println(res)
+	//fmt.Println(repo.GetGame(res.Code))
+	//repo.ChangeStatus(res.Code, "Started")
+	//repo.AddLike(res.Code, "123", 161)
 }
 
 var ctx = context.Background()
@@ -68,7 +68,7 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 		res = &ResID{Id: *filtered}
 	}
 	if res != nil {
-		httpOk(w, *res)
+		//httpOk(w, *res)
 	}
 }
 func inArray(s string, arr []string) bool {
@@ -78,17 +78,4 @@ func inArray(s string, arr []string) bool {
 		}
 	}
 	return false
-}
-
-func httpError(w http.ResponseWriter, err error) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusInternalServerError)
-	json.NewEncoder(w).Encode(err)
-}
-
-func httpOk(w http.ResponseWriter, res ResID) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(res)
-	//json.NewEncoder(w).Encode(resp)
 }
