@@ -10,22 +10,34 @@ from api_gateway.repositories.movie import MoviesRepository
 
 
 class Genre(BaseModel):
+    """
+    A pydantic model that represents a movie genre.
+    """
     id: int
     name: str
 
 
 class WatchProvider(BaseModel):
+    """
+    A pydantic model that represents a movie watch provider.
+    """
     logo: str
     provider_name: str
 
 
 class Cast(BaseModel):
+    """
+    A pydantic model that represents a movie cast member.
+    """
     profile: Optional[str]
     name: str
     character: str
 
 
 class MovieInfo(BaseModel):
+    """
+    A pydantic model that represents a movie's information.
+    """
     id: int
     title: str
     original_title: str
@@ -42,6 +54,9 @@ class MovieInfo(BaseModel):
 
 
 class SearchMovieInfo(BaseModel):
+    """
+    A pydantic model that represents a movie's information.
+    """
     id: int
     title: Optional[str]
     poster: Optional[str]
@@ -52,12 +67,18 @@ class SearchMovieInfo(BaseModel):
 
 
 class MovieSearchResult(BaseModel):
+    """
+    A pydantic model that represents a movie search result.
+    """
     page: int
     result: List[SearchMovieInfo]
     total_pages: int
 
 
 class MoviesController:
+    """
+    Controller for the movie information.
+    """
 
     def __init__(
         self,
@@ -73,6 +94,9 @@ class MoviesController:
         user_id: uuid.uuid4,
         locale: str,
     ) -> MovieInfo:
+        """
+        Get the movie information.
+        """
         movie_info = await self.movies_repository.get_movie_info(
             movie_id=movie_id,
             locale=locale
@@ -122,6 +146,9 @@ class MoviesController:
         user_id: uuid.uuid4,
         locale: str,
     ) -> MovieSearchResult:
+        """
+        Search for a movie.
+        """
         search_res = await self.movies_repository.search_movie(
             q=query,
             page=page,

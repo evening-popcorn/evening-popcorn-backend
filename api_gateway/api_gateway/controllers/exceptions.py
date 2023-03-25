@@ -1,2 +1,4 @@
 class MovieNotFound(Exception):
-    pass
+    """
+    Exception raised when a movie is not found.
+    """

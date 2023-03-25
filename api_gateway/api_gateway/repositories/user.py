@@ -47,6 +47,9 @@ class UserRepository:
         return UserDto(user)
 
     async def find_user_by_email(self, email: str) -> UserDto:
+        """
+        Find user by email
+        """
         try:
             user = await self.model.get(email=email)
         except DoesNotExist:

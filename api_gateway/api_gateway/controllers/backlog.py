@@ -11,6 +11,9 @@ from api_gateway.repositories.movie import MoviesRepository
 
 
 class UserBacklogEntry(BaseModel):
+    """
+    A pydantic model that represents a user's backlog entry.
+    """
     id: int
     title: Optional[str]
     poster: Optional[str]
@@ -20,18 +23,27 @@ class UserBacklogEntry(BaseModel):
 
 
 class UserBacklog(BaseModel):
+    """
+    A pydantic model that represents a user's backlog.
+    """
     page: int
     total_pages: int
     backlog: List[UserBacklogEntry]
 
 
 class BacklogController:
+    """
+    Controller for the user's backlog.
+    """
 
     def __init__(
         self,
         movies_repository: MoviesRepository = Depends(),
         backlog_repository: BacklogRepository = Depends()
     ) -> None:
+        """
+        Initialize the controller.
+        """
         self.movies_repository = movies_repository
         self.backlog_repository = backlog_repository
 
@@ -41,6 +53,9 @@ class BacklogController:
         locale: str,
         page: int = 1
     ) -> UserBacklog:
+        """
+        Get the user's backlog.
+        """
         backlog = await self.backlog_repository.get_user_backlog(
             user_id=user_id, page=page)
         movie_ids = [entry.movie_id for entry in backlog.backlog]
@@ -70,6 +85,9 @@ class BacklogController:
         movie_id: int,
         note: str,
     ) -> bool:
+        """
+        Add a movie to the user's backlog.
+        """
         movie = await self.movies_repository.get_movie_info(movie_id=movie_id,
                                                             locale="en-US")
         if not movie:
@@ -85,6 +103,9 @@ class BacklogController:
         user_id: UUID,
         movie_id: int,
     ):
+        """
+        Delete a movie from the user's backlog.
+        """
         return await self.backlog_repository.remove_from_backlog(
             user_id=user_id,
             movie_id=movie_id

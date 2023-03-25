@@ -6,6 +6,9 @@ from api_gateway.models.user import Users
 
 
 class UserDto(BaseModel):
+    """
+    User DTO
+    """
     id: UUID
     email: str
     name: str

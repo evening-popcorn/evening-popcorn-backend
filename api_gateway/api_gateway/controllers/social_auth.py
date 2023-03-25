@@ -20,6 +20,9 @@ from api_gateway.utils.rand_string import generate_random_string
 
 
 class LoginResponse(BaseModel):
+    """
+    A pydantic model that represents a login response.
+    """
     is_new_user: bool
     user: UserInfo
     token: AuthToken
@@ -43,12 +46,19 @@ class UserNotLinkedOAuthException(Exception):
 
 
 class SocialAuthController:
+    """
+    Controller for social authentication
+    """
+
     def __init__(
         self,
         auth_repository: AuthRepository = Depends(),
         oauth_repository: OAuthClientRepository = Depends(),
         user_repository: UserRepository = Depends(),
     ) -> None:
+        """
+        Initialize the controller
+        """
         self.auth_repository = auth_repository
         self.oauth_repository = oauth_repository
         self.user_repository = user_repository
@@ -59,6 +69,9 @@ class SocialAuthController:
         oauth_type: Literal["apple", "google"],
         auth_code: str,
     ) -> LoginResponse:
+        """
+        Login with OAuth
+        """
         try:
             match oauth_type:
                 case "apple":

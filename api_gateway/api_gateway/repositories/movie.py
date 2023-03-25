@@ -17,6 +17,9 @@ class MoviesRepository:
         movie_id: int,
         locale: str,
     ) -> MovieInfo:
+        """
+        Get movie info
+        """
         return await self.moviegeek_client.get_movie(movie_id=movie_id,
                                                      locale=locale)
 
@@ -25,6 +28,9 @@ class MoviesRepository:
         movie_ids: List[int],
         locale: str,
     ) -> Dict[int, SearchMovieInfo]:
+        """
+        Get movies info
+        """
         return await self.moviegeek_client.get_movies(
             movie_ids=movie_ids,
             locale=locale,
@@ -35,6 +41,9 @@ class MoviesRepository:
         page: int,
         locale: str,
     ) -> MovieSearchResult:
+        """
+        Search movie
+        """
         return await self.moviegeek_client.search_movie(
             q=q,
             page=page,

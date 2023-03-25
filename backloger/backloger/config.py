@@ -9,5 +9,8 @@ POSTGRES_CONFIG = PostgresConfig()
 
 
 async def pg_connection() -> Connection:
+    """
+    Postgres connection dependency
+    """
     conn = await asyncpg.connect(POSTGRES_CONFIG.get_connection_url())
     return conn

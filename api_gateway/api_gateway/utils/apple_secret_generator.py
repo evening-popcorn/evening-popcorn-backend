@@ -12,6 +12,9 @@ def generate_apple_client_secret(
     key_id: str,
     expiration_delta: timedelta,
 ) -> Tuple[str, datetime]:
+    """
+    Generate Apple OAuth client secret
+    """
     timestamp_now = datetime.now()
     timestamp_exp = timestamp_now + expiration_delta
     data = {

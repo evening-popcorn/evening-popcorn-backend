@@ -15,14 +15,24 @@ PAGE_SIZE = 20
 
 
 class BacklogController:
+    """
+    Backlog controller
+    """
+
     def __init__(
         self, backlog_repository: BacklogRepository = Depends()
     ) -> None:
+        """
+        Init controller
+        """
         self.backlog_repository = backlog_repository
 
     async def get_user_backlog(
         self, user_id: UUID, page: int = 1
     ) -> UserBacklog:
+        """
+        Get user backlog
+        """
         total_size = await self.backlog_repository \
             .get_user_backlog_size(user_id)
         backlog = await self.backlog_repository.get_users_backlog(
@@ -46,6 +56,9 @@ class BacklogController:
     async def add_to_backlog(
         self, user_id: UUID, movie_id: int, note: str
     ) -> bool:
+        """
+        Add movie to backlog
+        """
         in_backlog, _ = (await self.backlog_repository.check_is_in_backlog(
             user_id=user_id,
             movie_ids=[movie_id]
@@ -67,6 +80,9 @@ class BacklogController:
     async def delete_from_backlog(
         self, user_id: UUID, movie_id: int,
     ) -> bool:
+        """
+        Delete movie from backlog
+        """
         res = await self.backlog_repository.remove_from_backlog(
             user_id=user_id,
             movie_id=movie_id,
@@ -76,6 +92,9 @@ class BacklogController:
     async def check_is_movie_in_backlog(
         self, user_id: UUID, movie_ids: List[int]
     ) -> Dict[str, BacklogCheck]:
+        """
+        Check is movie in backlog
+        """
         res = await self.backlog_repository.check_is_in_backlog(
             user_id=user_id,
             movie_ids=movie_ids

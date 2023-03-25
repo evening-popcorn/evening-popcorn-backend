@@ -23,6 +23,9 @@ async def social_login(
     body: OAuthBody = Body(),
     controller: SocialAuthController = Depends()
 ) -> LoginResponse:
+    """
+    Login with OAuth
+    """
     try:
         user = await controller.login(
             oauth_type=body.oauth_type,

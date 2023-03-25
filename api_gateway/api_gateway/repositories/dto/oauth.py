@@ -8,6 +8,9 @@ from api_gateway.repositories.dto.user import UserDto
 
 
 class OAuthClientDto(BaseModel):
+    """
+    A pydantic model that represents an OAuth client.
+    """
     id: str
     user: Optional[UserDto]
     service: str

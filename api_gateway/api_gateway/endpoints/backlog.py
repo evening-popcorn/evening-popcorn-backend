@@ -22,6 +22,9 @@ async def get_my_backlog(
     x_language: str = Header(default="RU"),
     backlog_controller: BacklogController = Depends()
 ) -> UserBacklog:
+    """
+    Get user's backlog
+    """
     return await backlog_controller.get_user_backlog(user_id=user.id,
                                                      locale=x_language,
                                                      page=page)
@@ -34,6 +37,9 @@ async def add_to_backlog(
     user: UserDto = Depends(auth_user),
     backlog_controller: BacklogController = Depends()
 ) -> SimpleResponse:
+    """
+    Add movie to user's backlog
+    """
     try:
         res = await backlog_controller.add_to_backlog(
             user_id=user.id,
@@ -53,6 +59,9 @@ async def delete_from_backlog(
     user: UserDto = Depends(auth_user),
     backlog_controller: BacklogController = Depends()
 ) -> SimpleResponse:
+    """
+    Delete movie from user's backlog
+    """
     res = await backlog_controller.delete_from_backlog(
         user_id=user.id,
         movie_id=movie_id,

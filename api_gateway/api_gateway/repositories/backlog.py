@@ -17,6 +17,9 @@ class BacklogRepository:
         user_id: uuid.UUID,
         page: int = 1
     ) -> Backlog:
+        """
+        Get user backlog
+        """
         res = await self.backloger_client.get_user_backlog(
             user_id=user_id,
             page=page
@@ -39,6 +42,9 @@ class BacklogRepository:
         movie_id: int,
         user_id: uuid.UUID
     ) -> BacklogStatus:
+        """
+        Get movie status
+        """
         res = (await self.backloger_client.check_is_in_backlog(
             movie_ids=[movie_id],
             user_id=user_id,
@@ -54,6 +60,9 @@ class BacklogRepository:
         movie_ids: List[int],
         user_id: uuid.UUID,
     ) -> Dict[int, BacklogStatus]:
+        """
+        Bulk get movie status
+        """
         res = await self.backloger_client.check_is_in_backlog(
             user_id=user_id,
             movie_ids=movie_ids
@@ -73,6 +82,9 @@ class BacklogRepository:
         movie_id: int,
         note: str
     ) -> bool:
+        """
+        Add movie to backlog
+        """
         return await self.backloger_client.add_to_backlog(
             user_id=user_id,
             movie_id=movie_id,

@@ -2,6 +2,9 @@ from ep_utils.config_model import ConfigModel
 
 
 class PostgresConfig(ConfigModel):
+    """
+    Postgres config
+    """
     user: str
     pwd: str
     host: str

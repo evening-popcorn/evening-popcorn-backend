@@ -17,6 +17,9 @@ class AuthController:
         auth_repository: AuthRepository = Depends(),
         user_repository: UserRepository = Depends(),
     ) -> None:
+        """
+        Initialize the controller
+        """
         self.user_repository = user_repository
         self.auth_repository = auth_repository
 

@@ -20,6 +20,9 @@ async def search_movie(
     movie_controller: MoviesController = Depends(),
     x_language: str = Header(default="RU")
 ) -> MovieSearchResult:
+    """
+    Search movie by query
+    """
     return await movie_controller.search_movie(
         query=q,
         page=page,
@@ -35,6 +38,9 @@ async def get_movie_info(
     movie_controller: MoviesController = Depends(),
     x_language: str = Header(default="RU")
 ) -> MovieInfo:
+    """
+    Get movie info by id
+    """
     return await movie_controller.get_movie_info(
         movie_id=movie_id,
         user_id=user.id,

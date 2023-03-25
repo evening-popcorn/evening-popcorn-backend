@@ -27,6 +27,9 @@ TORTOISE_ORM = {
 
 
 class AppleSighInConfig(ConfigModel):
+    """
+    Apple sign-in config
+    """
     client_id: str
     team_id: str
 
@@ -43,6 +46,9 @@ class AppleSighInConfig(ConfigModel):
 
     @property
     def client_secret(self):
+        """
+        Get client secret
+        """
         now = datetime.now()
         if self._secret_cache and self._secret_expiration < now:
             return self._secret_cache
@@ -62,6 +68,9 @@ APPLE_SIGN_IN_CONFIG = AppleSighInConfig()
 
 
 class GoogleAuthConfig(ConfigModel):
+    """
+    Google OAuth config
+    """
     client_id: str
     client_secret: str
     redirect_uri: str = "https://eveningpopcorn.dev/api/auth"

@@ -9,6 +9,9 @@ from api_gateway.repositories.exceptions import ObjectDoesNotFound
 
 
 class OAuthClientRepository:
+    """
+    OAuth clients repository
+    """
 
     def __init__(self) -> None:
         self.model = OAuthClient
@@ -21,6 +24,9 @@ class OAuthClientRepository:
         service: str,
         client_id: str,
     ):
+        """
+        Create new OAuth client
+        """
         client = await self.model.create(
             id=id or uuid.uuid4(),
             user_id=user_id,
@@ -32,6 +38,9 @@ class OAuthClientRepository:
         return OAuthClientDto(client)
 
     async def find_client_by_client_id(self, client_id: str):
+        """
+        Find client by client_id
+        """
         try:
             client = await self.model \
                 .get(client_id=client_id) \
@@ -41,6 +50,9 @@ class OAuthClientRepository:
         return OAuthClientDto(client)
 
     async def find_client_by_user_id(self, user_id: str) -> OAuthClientDto:
+        """
+        Find client by user_id
+        """
         try:
             client = await self.model \
                 .get(user_id=user_id) \
