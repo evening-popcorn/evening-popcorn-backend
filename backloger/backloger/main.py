@@ -23,6 +23,9 @@ async def get_movie_info(
     page: int = Query(ge=1, default=1),
     controller: BacklogController = Depends()
 ) -> UserBacklog:
+    """
+    Get user backlog
+    """
     return await controller.get_user_backlog(
         user_id=user_id,
         page=page,
@@ -36,6 +39,9 @@ async def add_to_backlog(
     note: str = Body(max_length=1024),
     controller: BacklogController = Depends()
 ) -> SimpleResponse:
+    """
+    Add movie to backlog
+    """
     return SimpleResponse(
         success=await controller.add_to_backlog(
             user_id=user_id,
@@ -51,6 +57,9 @@ async def delete_from_backlog(
     movie_id: int = Query(),
     controller: BacklogController = Depends()
 ) -> SimpleResponse:
+    """
+    Delete movie from backlog
+    """
     return SimpleResponse(
         success=await controller.delete_from_backlog(
             user_id=user_id,
@@ -65,6 +74,9 @@ async def check_is_in_backlog(
     movie_ids: List[int] = Query(),
     controller: BacklogController = Depends()
 ) -> Dict[str, BacklogCheck]:
+    """
+    Check is movie in backlog
+    """
     return await controller.check_is_movie_in_backlog(
         user_id=user_id,
         movie_ids=movie_ids

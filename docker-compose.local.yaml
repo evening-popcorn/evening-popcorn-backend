@@ -1,0 +1,30 @@
+# Local development environment
+version: '3.1'
+
+services:
+
+  postgres-db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: eveningPopcorn
+      POSTGRES_DB: eveningPopcorn
+
+  mongo-db:
+    image: mongo
+    restart: always
+    ports:
+      -  27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: eveningpopcorn
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379

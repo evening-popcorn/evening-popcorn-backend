@@ -1,15 +1,15 @@
-GET http://localhost:8082/v1/user-backlog?user_id=b40e9143-d580-42ed-bee1-7766e215e32b
+GET {{host}}/v1/user-backlog?user_id={{user}}
 
 ###
-GET http://localhost:8082/v1/check-is-in-backlog?user_id=b40e9143-d580-42ed-bee1-7766e215e32b&movie_ids=161&movie_ids=162
+GET {{host}}/v1/check-is-in-backlog?user_id={{user}}&movie_ids=161&movie_ids=162
 
 ###
 
-POST http://localhost:8082/v1/user-backlog
+POST {{host}}/v1/user-backlog
 Content-Type: application/json
 
 {
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
+  "user_id": "{{user}}",
   "movie_id": 150,
   "note": "126"
 }

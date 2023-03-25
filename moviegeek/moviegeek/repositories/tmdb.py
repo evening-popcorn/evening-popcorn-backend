@@ -14,6 +14,9 @@ from moviegeek.repositories.dto.tmdb import MovieSearchResult
 
 
 class TMDBRepository:
+    """
+    Repository for The Movie DB
+    """
     def __init__(
         self,
         mongo_connection: AsyncIOMotorDatabase = Depends(mongodb_connection),
@@ -31,6 +34,9 @@ class TMDBRepository:
         movie_id: int,
         locale: str,
     ) -> Movie:
+        """
+        Get movie info
+        """
         obj = await self.mongo_connection["movies_cache"].find_one({
             "_id": f"{movie_id}/{locale}",
         })
@@ -84,6 +90,9 @@ class TMDBRepository:
     async def search_movie(
         self, query: str, locale: str, page: int
     ) -> MovieSearchResult:
+        """
+        Search movie
+        """
         params = {
                 "query": query,
                 "language": locale,

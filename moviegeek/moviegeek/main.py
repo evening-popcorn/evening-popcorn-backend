@@ -19,6 +19,10 @@ async def search_movie(
     locale: str = Query(),
     movie_controller: MoviesController = Depends(),
 ) -> MovieSearchResult:
+    """
+    Search movie
+    :return:
+    """
     return await movie_controller.search_movie(
         query=q,
         page=page,
@@ -32,6 +36,9 @@ async def search_movie(
     locale: str = Query(),
     movie_controller: MoviesController = Depends(),
 ):
+    """
+    Search movie
+    """
     return await movie_controller.get_movies(
         movie_ids=movie_ids,
         locale=locale,
@@ -44,6 +51,9 @@ async def get_movie_info(
     locale: str = Query(),
     movie_controller: MoviesController = Depends(),
 ) -> MovieInfo:
+    """
+    Get movie info
+    """
     return await movie_controller.get_movie(
         movie_id=movie_id,
         locale=locale,

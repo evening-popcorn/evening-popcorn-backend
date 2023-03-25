@@ -8,6 +8,9 @@ load_dotenv()
 
 
 class TmdbConfig(ConfigModel):
+    """
+    TMDB config
+    """
     api_key: str
 
 
@@ -15,6 +18,9 @@ TMDB_CONFIG = TmdbConfig()
 
 
 class MongoConfig(ConfigModel):
+    """
+    Mongo config
+    """
     protocol: str = "mongodb"
     user: str
     pwd: str

@@ -6,22 +6,34 @@ from pydantic import BaseModel
 
 
 class Genre(BaseModel):
+    """
+    Genre
+    """
     id: int
     name: Optional[str]
 
 
 class WatchProvider(BaseModel):
+    """
+    Watch provider
+    """
     logo: Optional[str]
     provider_name: Optional[str]
 
 
 class Cast(BaseModel):
+    """
+    Cast
+    """
     profile: Optional[str]
     name: Optional[str]
     character: Optional[str]
 
 
 class MovieInfo(BaseModel):
+    """
+    Movie info
+    """
     id: int
     title: Optional[str]
     original_title: Optional[str]
@@ -36,6 +48,9 @@ class MovieInfo(BaseModel):
 
 
 class SearchMovieInfo(BaseModel):
+    """
+    Info about movie in search result
+    """
     id: int
     title: Optional[str]
     poster: Optional[str]
@@ -44,6 +59,9 @@ class SearchMovieInfo(BaseModel):
 
 
 class MovieSearchResult(BaseModel):
+    """
+    Search result
+    """
     page: int
     result: List[SearchMovieInfo]
     total_pages: int

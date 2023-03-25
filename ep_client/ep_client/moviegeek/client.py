@@ -10,13 +10,22 @@ from ep_client.moviegeek.responses import SearchMovieInfo
 
 
 class MovieGeekClient:
+    """
+    Client for MovieGeek microservice
+    """
 
     def __init__(self) -> None:
+        """
+        Init client
+        """
         self.client = httpx.AsyncClient(
             base_url=os.environ.get("CLIENT_MOVIEGEEK_URL", "http://moviegeek")
         )
 
     async def get_movie(self, movie_id: int, locale: str) -> MovieInfo:
+        """
+        Get movie info
+        """
         res = await self.client.get(f"/v1/movie/{movie_id}", params={
             "locale": locale
         })
@@ -27,6 +36,9 @@ class MovieGeekClient:
         self,
         movie_ids: List[int], locale: str
     ) -> Dict[int, SearchMovieInfo]:
+        """
+        Get movies info
+        """
         res = await self.client.get(f"/v1/movie/bulk", params={
             "movie_ids": movie_ids,
             "locale": locale
@@ -43,6 +55,9 @@ class MovieGeekClient:
         page: int,
         locale: str,
     ) -> MovieSearchResult:
+        """
+        Search movie
+        """
         res = await self.client.get(f"/v1/movie/search", params={
             "q": q,
             "page": page,
