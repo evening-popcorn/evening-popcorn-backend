@@ -89,5 +89,5 @@ jobs:
       - uses: actions/checkout@v3
       - name: Deploy to K8s
         run: |
-          kubectl apply -f api-gateway/deploy/manifest.yaml
+          kubectl apply -f api_gateway/deploy/manifest.yaml
           kubectl rollout restart deployment/api-gateway-deployment
