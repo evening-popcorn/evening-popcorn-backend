@@ -12,10 +12,10 @@ Content-Type: application/json
 X-Token: oV3cfPdbZ178SAPDULEOnFNpQB5iJHdoQ3GwJjKHCdDyRVf5GDCrEn7oWbPWExRx
 
 {
-  "code": "Z9264MD8"
+  "code": "UkmmQGi2"
 }
 
 ###
-GET localhost:8083/game-api/v1/game?code=Z9264MD8
+GET localhost:8083/game-api/v1/game?code=UkmmQGi2
 Content-Type: application/json
 X-Token: oV3cfPdbZ178SAPDULEOnFNpQB5iJHdoQ3GwJjKHCdDyRVf5GDCrEn7oWbPWExRx

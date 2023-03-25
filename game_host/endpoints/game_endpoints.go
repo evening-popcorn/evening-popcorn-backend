@@ -21,6 +21,11 @@ type NewGame struct {
 	Name string `json:"name"`
 }
 
+type AlreadyInOtherGameError struct {
+	Detail string `json:"detail"`
+	Code   string `json:"code"`
+}
+
 func (e *GameEndpoints) CreateGame(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
 	if r.Method != "POST" {
 		lib.HttpError(
@@ -32,7 +37,19 @@ func (e *GameEndpoints) CreateGame(w http.ResponseWriter, r *http.Request, user 
 	if err != nil {
 		return
 	}
-	res := e.gameController.CreateGame(user, body.Name)
+	res, err := e.gameController.CreateGame(user, body.Name)
+	if err != nil {
+		switch err.(type) {
+		case *controllers.UserAlreadyInGame:
+			lib.HttpError(w, AlreadyInOtherGameError{
+				Detail: "Already in other game",
+				Code:   err.Error(),
+			}, http.StatusConflict)
+		default:
+			lib.HttpServerError(w)
+		}
+		return
+	}
 	lib.HttpOk(w, res)
 }
 
@@ -40,7 +57,7 @@ type GameMeta struct {
 	Code string `json:"code"`
 }
 
-func (e GameEndpoints) JoinGame(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
+func (e *GameEndpoints) JoinGame(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
 	if r.Method != "POST" {
 		lib.HttpError(
 			w, lib.ErrorRes{
@@ -54,6 +71,11 @@ func (e GameEndpoints) JoinGame(w http.ResponseWriter, r *http.Request, user *li
 	res, err := e.gameController.JoinGame(user, body.Code)
 	if err != nil {
 		switch err.(type) {
+		case *controllers.UserAlreadyInGame:
+			lib.HttpError(w, AlreadyInOtherGameError{
+				Detail: "Already in other game",
+				Code:   err.Error(),
+			}, http.StatusConflict)
 		case *gr.GameAlreadyStarted:
 			lib.HttpError(w, lib.ErrorRes{
 				Detail: err.Error(),
@@ -74,7 +96,7 @@ func (e GameEndpoints) JoinGame(w http.ResponseWriter, r *http.Request, user *li
 	lib.HttpOk(w, res)
 }
 
-func (e GameEndpoints) GetGame(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
+func (e *GameEndpoints) GetGame(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
 	if r.Method != "GET" {
 		lib.HttpError(
 			w, lib.ErrorRes{

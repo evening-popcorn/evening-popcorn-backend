@@ -9,7 +9,7 @@ type ErrorRes struct {
 	Detail string `json:"detail"`
 }
 
-func HttpError(w http.ResponseWriter, err ErrorRes, statusCode int) {
+func HttpError(w http.ResponseWriter, err any, statusCode int) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(statusCode)
 	_ = json.NewEncoder(w).Encode(err)
@@ -32,7 +32,7 @@ func CatchHttpPanic(f func(w http.ResponseWriter, r *http.Request)) func(w http.
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if err := recover(); err != nil {
-				HttpError(w, ErrorRes{Detail: "Internal server error"}, http.StatusInternalServerError)
+				HttpServerError(w)
 			}
 		}()
 		f(w, r)

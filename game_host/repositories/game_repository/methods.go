@@ -39,6 +39,19 @@ func (r *GameRepository) CreateGame(info *lib.UserInfo, name string) GameInfo {
 	r.redisClient.Set(r.ctx, "game."+code+".status", StatusCreated, time.Hour*24)
 	return gameInfo
 }
+
+func (r *GameRepository) CreateUserLock(userId string, code string) {
+	r.redisClient.Set(r.ctx, "lock."+userId, code, 24*time.Hour)
+}
+
+func (r *GameRepository) CheckUserLock(userId string) string {
+	return r.redisClient.Get(r.ctx, "lock."+userId).Val()
+}
+
+func (r *GameRepository) ReleaseUserLock(userId string) {
+	r.redisClient.Del(r.ctx, "lock."+userId)
+}
+
 func (r *GameRepository) AddPlayer(code string, info *lib.UserInfo) {
 	r.redisClient.SAdd(r.ctx, "game."+code+".players", info.Id)
 	host, _ := json.Marshal(PlayerInfo{
@@ -70,10 +83,10 @@ func (r *GameRepository) GetGame(code string) (*GamePackage, error) {
 	if exist.Val() == 0 {
 		return nil, &GameNotExist{}
 	}
-	info_obj := r.redisClient.Get(r.ctx, "game."+code)
+	infoObj := r.redisClient.Get(r.ctx, "game."+code)
 	var info GameInfo
 	//fmt.Println(info_obj.Val())
-	err := json.Unmarshal([]byte(info_obj.Val()), &info)
+	err := json.Unmarshal([]byte(infoObj.Val()), &info)
 	if err != nil {
 		return nil, err
 	}
@@ -91,6 +104,29 @@ func (r *GameRepository) ChangeStatus(code string, status string) {
 
 func (r *GameRepository) GetStatus(code string) string {
 	return r.redisClient.Get(r.ctx, "game."+code+".status").Val()
+}
+
+func (r *GameRepository) IsUserHost(code string, userId string) bool {
+	data := r.redisClient.Get(r.ctx, "game."+code+".player."+userId).Val()
+	var info PlayerInfo
+	_ = json.Unmarshal([]byte(data), &info)
+	return info.IsHost
+}
+
+func (r *GameRepository) RemoveUser(code string, userId string) {
+
+}
+
+func (r *GameRepository) DeleteGame(code string) {
+	r.redisClient.Del(r.ctx, "game."+code)
+	players := r.redisClient.SMembers(r.ctx, "game."+code+".players").Val()
+	for _, player := range players {
+		r.redisClient.Del(r.ctx, "game."+code+".player."+player).Val()
+		r.ReleaseUserLock(player)
+	}
+	r.redisClient.Del(r.ctx, "game."+code+".players")
+	r.redisClient.Del(r.ctx, "game."+code+".status")
+
 }
 
 func (r *GameRepository) AddLike(code string, playerId string, movieId int) error {
