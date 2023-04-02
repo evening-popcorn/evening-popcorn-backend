@@ -36,6 +36,13 @@ func (e *GameAlreadyStarted) Error() string {
 	return "Game already started"
 }
 
+type GameDeleted struct {
+}
+
+func (e *GameDeleted) Error() string {
+	return "Game deleted"
+}
+
 type AlreadyInGame struct {
 }
 
@@ -50,6 +57,16 @@ func (e *NotMemberOfGame) Error() string {
 	return "You not part of this game"
 }
 
+type NotHostOfGame struct {
+}
+
+func (e *NotHostOfGame) Error() string {
+	return "You not host of this game"
+}
+
 const (
 	StatusCreated = "Created"
+	StatusStarted = "Started"
+	StatusEnded   = "Ended"
+	StatusDeleted = "Deleted"
 )

@@ -1,3 +1,12 @@
+GET http://localhost:8081/v1/movie/bulk?movie_ids=165&locale=RU
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-04-02T200613.200.json
+
+###
+
 GET http://localhost:8080/api/v1/auth/me
 Content-Type: application/json
 X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
@@ -429,19 +438,6 @@ GET http://localhost:8081/v1/movie/bulk?movie_ids=161&movie_ids=162&locale=RU
 GET http://localhost:8081/v1/movie/bulk?movie_ids=161&movie_ids=162
 
 <> 2023-03-15T164358.422.json
-
-###
-
-POST http://localhost:8082/v1/user-backlog
-Content-Type: application/json
-
-{
-  "user_id": "b40e9143-d580-42ed-bee1-7766e215e32b",
-  "movie_id": 150,
-  "note": "126"
-}
-
-<> 2023-03-15T162841.200.json
 
 ###
 

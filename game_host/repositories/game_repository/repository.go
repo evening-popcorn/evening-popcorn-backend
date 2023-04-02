@@ -8,11 +8,13 @@ import (
 	"strconv"
 )
 
+// GameRepository - repository for game
 type GameRepository struct {
 	ctx         context.Context
 	redisClient *redis.Client
 }
 
+// NewGameRepository - create new game repository
 func NewGameRepository() *GameRepository {
 	db, err := strconv.Atoi(lib.GetEnv("REDIS_DB", "0"))
 	if err != nil {

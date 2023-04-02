@@ -19,3 +19,25 @@ X-Token: oV3cfPdbZ178SAPDULEOnFNpQB5iJHdoQ3GwJjKHCdDyRVf5GDCrEn7oWbPWExRx
 GET localhost:8083/game-api/v1/game?code=UkmmQGi2
 Content-Type: application/json
 X-Token: oV3cfPdbZ178SAPDULEOnFNpQB5iJHdoQ3GwJjKHCdDyRVf5GDCrEn7oWbPWExRx
+
+###
+POST localhost:8083/game-api/v1/game/movie
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+
+{
+  "code": "9pE0zKzk",
+  "movie_id": 3
+}
+
+###
+GET localhost:8083/game-api/v1/game/movie?code=9pE0zKzk
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU
+
+###
+DELETE localhost:8083/game-api/v1/game/movie?code=9pE0zKzk&movie_id=76600
+Content-Type: application/json
+X-Token: 6vTOATz2G3mlH4GOuPajmg1LM9LMl7EGLSijsy4Hj4DfFmEbfe6UnOsp17HiGzK0
+X-Language: RU

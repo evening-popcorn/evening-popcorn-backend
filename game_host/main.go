@@ -30,15 +30,6 @@ func main() {
 		fmt.Printf("error starting server: %s\n", err)
 		os.Exit(1)
 	}
-	//repo := rep.NewGameRepository()
-	//res := repo.CreateGame(
-	//	&lib.UserInfo{Name: "Иван Дмитриев", Id: "123", Email: "van4011@gmail.com"},
-	//	"Test",
-	//)
-	//fmt.Println(res)
-	//fmt.Println(repo.GetGame(res.Code))
-	//repo.ChangeStatus(res.Code, "Started")
-	//repo.AddLike(res.Code, "123", 161)
 }
 
 var ctx = context.Background()

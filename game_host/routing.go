@@ -15,4 +15,5 @@ func SetupRouting() {
 		lib.CatchHttpPanic(auth.AuthUser(ep.CreateGame)))
 	http.HandleFunc("/game-api/v1/join-game", lib.CatchHttpPanic(auth.AuthUser(ep.JoinGame)))
 	http.HandleFunc("/game-api/v1/game", lib.CatchHttpPanic(auth.AuthUser(ep.GetGame)))
+	http.HandleFunc("/game-api/v1/game/movie", lib.CatchHttpPanic(auth.AuthUser(ep.GameMovie)))
 }
