@@ -1,2 +1,0 @@
-class MovieNotFound(Exception):
-    pass

@@ -3,3 +3,4 @@
 /moviegeek/http-client.env.json
 /moviegeek/.idea/httpRequests/*
 venv
+http-client.env.json

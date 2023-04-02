@@ -4,18 +4,18 @@ from typing import List
 
 from fastapi import Depends
 
-from ep_client.moviegeek.responses import Cast
-from ep_client.moviegeek.responses import Genre
 from ep_client.moviegeek.responses import MovieInfo
 from ep_client.moviegeek.responses import MovieSearchResult
 from ep_client.moviegeek.responses import SearchMovieInfo
-from ep_client.moviegeek.responses import WatchProvider
 from moviegeek.repositories.dto.tmdb import Movie
 from moviegeek.repositories.tmdb import TMDBRepository
 from moviegeek.utils import move_dto_to_movie_info
 
 
 class MoviesController:
+    """
+    Controller for movies
+    """
 
     def __init__(
         self,
@@ -28,6 +28,9 @@ class MoviesController:
         movie_id: int,
         locale: str
     ) -> MovieInfo:
+        """
+        Get movie info
+        """
         movie = await self.tmdb_repository.get_movie(
             movie_id=movie_id,
             locale=locale,
@@ -39,6 +42,9 @@ class MoviesController:
         movie_id: int,
         locale: str
     ) -> Movie | None:
+        """
+        Get movie info
+        """
         try:
             movie = await self.tmdb_repository.get_movie(
                 movie_id=movie_id,
@@ -52,6 +58,9 @@ class MoviesController:
         self,
         movie_ids: List[int], locale: str
     ) -> Dict[int, SearchMovieInfo]:
+        """
+        Get movies info
+        """
         res = await asyncio.gather(
             *[
                 self._get_movie_safe(movie_id=movie_id, locale=locale)
@@ -75,6 +84,9 @@ class MoviesController:
         page: int,
         locale: str
     ) -> MovieSearchResult:
+        """
+        Search movie
+        """
         res = await self.tmdb_repository.search_movie(
             query=query,
             page=page,

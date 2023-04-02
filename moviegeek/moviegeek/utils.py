@@ -6,6 +6,11 @@ from moviegeek.repositories.dto.tmdb import Movie
 
 
 def move_dto_to_movie_info(movie: Movie) -> MovieInfo:
+    """
+    Convert movie dto to movie info
+    :param movie:
+    :return:
+    """
     return MovieInfo(
             id=movie.id,
             title=movie.title,

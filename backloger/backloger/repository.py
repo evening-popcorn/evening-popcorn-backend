@@ -14,16 +14,28 @@ from backloger.dto import UserBacklogDto
 
 
 class BacklogOrder(StrEnum):
+    """
+    Backlog order enum
+    """
     added_at_desc = "added_at DESC"
     added_at_asc = "added_at ASC"
 
 
 class BacklogRepository:
+    """
+    Backlog repository
+    """
 
     def __init__(self, pg_conn: Connection = Depends(pg_connection)) -> None:
+        """
+        Init repository
+        """
         self.pg_conn = pg_conn
 
     async def get_user_backlog_size(self, user_id: UUID) -> int:
+        """
+        Get user backlog size
+        """
         sql = """
             SELECT count(*) as size
             FROM users_backlog
@@ -39,6 +51,9 @@ class BacklogRepository:
         offset: int = 0,
         order_by: BacklogOrder = BacklogOrder.added_at_asc
     ) -> List[UserBacklogDto]:
+        """
+        Get user backlog
+        """
         sql = """
             SELECT movie_id, note
             FROM users_backlog
@@ -61,6 +76,9 @@ class BacklogRepository:
         user_id: UUID,
         movie_ids: List[int]
     ) -> Dict[int, Tuple[bool, str]]:
+        """
+        Check if movie is in backlog
+        """
         sql = """
             SELECT movie_id, note
             FROM users_backlog
@@ -80,6 +98,9 @@ class BacklogRepository:
         movie_id: int,
         note: str
     ) -> bool:
+        """
+        Add movie to backlog
+        """
         sql = """
             INSERT INTO users_backlog (user_id, movie_id, note, added_at) 
             VALUES ($1, $2, $3, $4) 
@@ -98,6 +119,9 @@ class BacklogRepository:
         movie_id: int,
         note: str
     ) -> bool:
+        """
+        Update note in backlog
+        """
         sql = """
             UPDATE public.users_backlog
             SET note = $1
@@ -114,6 +138,9 @@ class BacklogRepository:
         user_id: UUID,
         movie_id: int
     ) -> bool:
+        """
+        Remove movie from backlog
+        """
         sql = """
             DELETE FROM users_backlog
             WHERE user_id = $1
