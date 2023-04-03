@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"game_host/lib"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -55,6 +56,8 @@ func (r MovieRepository) GetMovies(movieIds []int, locale string) (map[int]Movie
 	if err != nil {
 	}
 	if res.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(res.Body)
+		log.Print("Unexpected status code: ", res.StatusCode, " Body: ", string(body))
 		return nil, &UnexpectedError{}
 	}
 

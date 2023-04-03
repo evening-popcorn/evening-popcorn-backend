@@ -73,9 +73,13 @@ func (e *GameEndpoints) JoinGame(w http.ResponseWriter, r *http.Request, user *l
 			w, lib.ErrorRes{
 				Detail: "Method not supported",
 			}, http.StatusMethodNotAllowed)
+		return
 	}
 	body, err := lib.ParseJson[GameMeta](w, r)
 	if err != nil {
+		lib.HttpError(w, lib.ErrorRes{
+			Detail: "Failed to parse body",
+		}, http.StatusBadRequest)
 		return
 	}
 	res, err := e.gameController.JoinGame(user, body.Code)
@@ -113,6 +117,7 @@ func (e *GameEndpoints) GetGame(w http.ResponseWriter, r *http.Request, user *li
 			w, lib.ErrorRes{
 				Detail: "Method not supported",
 			}, http.StatusMethodNotAllowed)
+		return
 	}
 	code := r.URL.Query().Get("code")
 	if code == "" {
@@ -163,6 +168,9 @@ func (e *GameEndpoints) GameMovie(w http.ResponseWriter, r *http.Request, user *
 func (e *GameEndpoints) AddMovie(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
 	body, err := lib.ParseJson[AddMovieBody](w, r)
 	if err != nil {
+		lib.HttpError(w, lib.ErrorRes{
+			Detail: "Failed to parse body",
+		}, http.StatusBadRequest)
 		return
 	}
 	res, err := e.gameController.AddMoviesToRoster(user, body.Code, body.MovieId)
@@ -243,6 +251,162 @@ func (e *GameEndpoints) RemoveMovie(w http.ResponseWriter, r *http.Request, user
 				Detail: err.Error(),
 			}, http.StatusUnauthorized)
 		case *gr.GameNotExist:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		default:
+			lib.HttpServerError(w)
+		}
+		return
+	}
+	lib.HttpOk(w, SimpleResponse{
+		Success: res,
+	})
+}
+
+func (e *GameEndpoints) WaitUntilGameStart(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
+	if r.Method != "GET" {
+		lib.HttpError(
+			w, lib.ErrorRes{
+				Detail: "Method not supported",
+			}, http.StatusMethodNotAllowed)
+		return
+	}
+	code := r.URL.Query().Get("code")
+	if code == "" {
+		lib.HttpError(
+			w, lib.ErrorRes{Detail: "Code param required"}, http.StatusBadRequest)
+	}
+	res, err := e.gameController.WaitTillStart(user, code, 30)
+	if err != nil {
+		switch err.(type) {
+		case *gr.NotMemberOfGame:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		case *gr.GameNotExist:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		case *gr.GameAlreadyStarted:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		case *gr.GameDeleted:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		default:
+			lib.HttpServerError(w)
+		}
+		return
+	}
+	lib.HttpOk(w, SimpleResponse{Success: res})
+}
+
+func (e *GameEndpoints) StartGame(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
+	if r.Method != "POST" {
+		lib.HttpError(
+			w, lib.ErrorRes{
+				Detail: "Method not supported",
+			}, http.StatusMethodNotAllowed)
+		return
+	}
+	body, err := lib.ParseJson[GameMeta](w, r)
+	if err != nil {
+		return
+	}
+	res, err := e.gameController.StartGame(user, body.Code)
+	if err != nil {
+		switch err.(type) {
+		case *gr.NotMemberOfGame:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		case *gr.GameNotExist:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		case *gr.GameAlreadyStarted:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		default:
+			lib.HttpServerError(w)
+		}
+		return
+	}
+	lib.HttpOk(w, SimpleResponse{Success: res})
+}
+
+func (e *GameEndpoints) GetMovieRoster(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
+	code := r.URL.Query().Get("code")
+	if code == "" {
+		lib.HttpError(
+			w, lib.ErrorRes{Detail: "Code param required"}, http.StatusBadRequest)
+	}
+	pageStr := r.URL.Query().Get("page")
+	if pageStr == "" {
+		pageStr = "1"
+	}
+	page, err := strconv.Atoi(pageStr)
+	if err != nil {
+		lib.HttpError(
+			w, lib.ErrorRes{Detail: "Invalid page param"}, http.StatusBadRequest)
+	}
+	locale := r.Header.Get("X-Language")
+	if locale == "" {
+		locale = "en"
+	}
+	res, err := e.gameController.GetRoster(user, code, page, locale)
+	if err != nil {
+		switch err.(type) {
+		case *gr.NotMemberOfGame:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		case *gr.GameNotExist:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		default:
+			lib.HttpServerError(w)
+		}
+		return
+	}
+	lib.HttpOk(w, res)
+}
+
+func (e *GameEndpoints) LikeMovie(w http.ResponseWriter, r *http.Request, user *lib.UserInfo) {
+	if r.Method != "POST" {
+		lib.HttpError(
+			w, lib.ErrorRes{
+				Detail: "Method not supported",
+			}, http.StatusMethodNotAllowed)
+		return
+	}
+	body, err := lib.ParseJson[AddMovieBody](w, r)
+	if err != nil {
+		if err != nil {
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: "Failed to parse body",
+			}, http.StatusBadRequest)
+			return
+		}
+		return
+	}
+	res, err := e.gameController.LikeMovie(user, body.Code, body.MovieId)
+	if err != nil {
+		switch err.(type) {
+		case *gr.NotMemberOfGame:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		case *gr.GameNotExist:
+			lib.HttpError(w, lib.ErrorRes{
+				Detail: err.Error(),
+			}, http.StatusUnauthorized)
+		case *controllers.NotInRoster:
 			lib.HttpError(w, lib.ErrorRes{
 				Detail: err.Error(),
 			}, http.StatusUnauthorized)

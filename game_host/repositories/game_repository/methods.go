@@ -13,6 +13,7 @@ import (
 // game.{code}.players - players in game
 // game.{code}.player.{id} - player info
 // game.{code}.movies.{id} - movies in game of user
+// game.{code}.movies - all movies in game
 // game.{code}.status - status of game
 // game.{code}.likes.{id} - likes for movie
 // game.{code}.dislikes.{id} - dislikes for movie
@@ -155,6 +156,7 @@ func (r *GameRepository) DeleteGame(code string) {
 		r.ReleaseUserLock(player)
 	}
 	r.redisClient.Del(r.ctx, "game."+code+".players")
+	r.redisClient.Del(r.ctx, "game."+code+".movies")
 	r.redisClient.Set(r.ctx, "game."+code+".status", StatusDeleted, time.Hour*24)
 
 }
@@ -174,7 +176,7 @@ func (r *GameRepository) RemoveMovie(code string, playerId string, movie int) {
 }
 
 // GetMovies - get movies from player's roster
-func (r GameRepository) GetMovies(code string, playerId string) []int {
+func (r *GameRepository) GetMovies(code string, playerId string) []int {
 	movies := r.redisClient.SMembers(r.ctx, "game."+code+".movies."+playerId).Val()
 	moviesInt := make([]int, len(movies))
 	for i, movie := range movies {
@@ -184,12 +186,56 @@ func (r GameRepository) GetMovies(code string, playerId string) []int {
 	return moviesInt
 }
 
+func (r *GameRepository) GetAllMovies(code string) []int {
+	players := r.GetPlayers(code)
+	ids := make([]string, len(players))
+	for i, player := range players {
+		ids[i] = "game." + code + ".movies." + player.Id
+	}
+	moviesStr := r.redisClient.SUnion(r.ctx, ids...).Val()
+	movies := make([]int, len(moviesStr))
+	for i, movie := range moviesStr {
+		movieInt, _ := strconv.Atoi(movie)
+		movies[i] = movieInt
+	}
+	return movies
+}
+
+func (r *GameRepository) SaveMovieRoster(code string, movies []int) {
+	moviesStr := make([]string, len(movies))
+	for i, movie := range movies {
+		moviesStr[i] = strconv.Itoa(movie)
+	}
+	r.redisClient.LPush(r.ctx, "game."+code+".movies", moviesStr)
+	r.redisClient.Expire(r.ctx, "game."+code+".movies", time.Hour*24)
+}
+
+func (r *GameRepository) GetRosterMovies(code string, from int, to int) []int {
+	movies := r.redisClient.LRange(r.ctx, "game."+code+".movies", int64(from), int64(to)).Val()
+	moviesInt := make([]int, len(movies))
+	for i, movie := range movies {
+		movieInt, _ := strconv.Atoi(movie)
+		moviesInt[i] = movieInt
+	}
+	return moviesInt
+
+}
+
+func (r *GameRepository) GetRosterLen(code string) int {
+	return int(r.redisClient.LLen(r.ctx, "game."+code+".movies").Val())
+}
+
+// CheckIsInRoster - check if movie is in roster
+func (r *GameRepository) CheckIsInRoster(code string, movieId int) bool {
+	res := r.redisClient.LPos(r.ctx, "game."+code+".movies", strconv.Itoa(movieId), redis.LPosArgs{}).Val()
+	return res != 0
+}
+
 // AddLike - add like to movie
-func (r *GameRepository) AddLike(code string, playerId string, movieId int) error {
+func (r *GameRepository) AddLike(code string, playerId string, movieId int) {
 	exist := r.redisClient.Exists(r.ctx, "game."+code+".likes."+playerId).Val()
 	r.redisClient.SAdd(r.ctx, "game."+code+".likes."+playerId, movieId)
 	if exist == 0 {
 		r.redisClient.Expire(r.ctx, "game."+code+".likes."+playerId, time.Hour*24)
 	}
-	return nil
 }

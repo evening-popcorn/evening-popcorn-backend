@@ -4,6 +4,8 @@ import (
 	"game_host/lib"
 	"game_host/repositories"
 	gr "game_host/repositories/game_repository"
+	"math"
+	"time"
 )
 
 // GameController - controller fo games logic
@@ -149,7 +151,7 @@ func (s *GameController) GetUserRoster(user *lib.UserInfo, code string, locale s
 }
 
 // StartGame - start game
-func (s *GameController) StartGame(user *lib.UserInfo, code string, movie string) (bool, error) {
+func (s *GameController) StartGame(user *lib.UserInfo, code string) (bool, error) {
 	_, err := s.validateGame(user, code, true, gr.StatusCreated)
 	if err != nil {
 		return false, err
@@ -158,19 +160,87 @@ func (s *GameController) StartGame(user *lib.UserInfo, code string, movie string
 	if !host {
 		return false, &gr.NotHostOfGame{}
 	}
+	movies := s.gameRepository.GetAllMovies(code)
+	s.gameRepository.SaveMovieRoster(code, movies)
 	s.gameRepository.ChangeStatus(code, gr.StatusStarted)
 	return true, nil
 }
 
-func (s *GameController) WaitTillStart() {
+// WaitTillStart - wait till game start
+func (s *GameController) WaitTillStart(user *lib.UserInfo, code string, timeout int) (bool, error) {
+	_, err := s.validateGame(user, code, true, gr.StatusCreated)
+	if err != nil {
+		return false, err
+	}
+	for i := 0; i < timeout*10; i++ {
+		switch s.gameRepository.GetStatus(code) {
+		case gr.StatusCreated:
+			time.Sleep(time.Millisecond * 100)
+			continue
+		case gr.StatusStarted:
+			return true, nil
+		case gr.StatusDeleted:
+			return false, &gr.GameDeleted{}
+		}
+	}
+	return false, nil
+}
 
+type RosterInfo struct {
+	Movies     []repositories.Movie `json:"movies"`
+	Page       int                  `json:"page"`
+	TotalPages int                  `json:"total_pages"`
+}
+
+func (s *GameController) GetRoster(user *lib.UserInfo, code string, page int, locale string) (*RosterInfo, error) {
+	_, err := s.validateGame(user, code, true, gr.StatusStarted)
+	if err != nil {
+		return nil, err
+	}
+	moviesId := s.gameRepository.GetRosterMovies(code, (page-1)*20, page*20)
+	if len(moviesId) == 0 {
+		return &RosterInfo{
+			Movies:     []repositories.Movie{},
+			Page:       page,
+			TotalPages: int(math.Ceil(float64(s.gameRepository.GetRosterLen(code)) / 20.0)),
+		}, nil
+	}
+	moviesInfo, err := s.movieRepository.GetMovies(moviesId, locale)
+	if err != nil {
+		return nil, err
+	}
+	movies := make([]repositories.Movie, len(moviesInfo))
+	i := 0
+	for _, id := range moviesId {
+		movies[i] = moviesInfo[id]
+		i++
+	}
+	return &RosterInfo{
+		Movies:     movies,
+		Page:       page,
+		TotalPages: int(math.Ceil(float64(s.gameRepository.GetRosterLen(code)) / 20.0)),
+	}, nil
+}
+
+type NotInRoster struct {
+}
+
+func (e *NotInRoster) Error() string {
+	return "Movie is not in roster"
+}
+func (s *GameController) LikeMovie(user *lib.UserInfo, code string, movie int) (bool, error) {
+	_, err := s.validateGame(user, code, true, gr.StatusStarted)
+	if err != nil {
+		return false, err
+	}
+	if !s.gameRepository.CheckIsInRoster(code, movie) {
+		return false, &NotInRoster{}
+	}
+	s.gameRepository.AddLike(code, user.Id, movie)
+	return true, nil
 }
 
 func (s *GameController) WaitTillMatch() {
-
-}
-
-func (s *GameController) LikeMovie() {
 
 }
 
